@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+    <p>トップページ</p>
+
+    <form action="{% url  'player' %}">
+        <input id = 'next' type="submit" value="動画再生"/>
+    </form>
+
+    <form action="{% url  'cut' %}">
+        <input id = 'next' type="submit" value="動画分割"/>
+    </form>
+
+    <form action="{% url  'upload' %}">
+        <input id = 'next' type="submit" value="動画アップロード"/>
+    </form>
+
+</body>
+</html>

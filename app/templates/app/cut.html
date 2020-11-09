@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <p>動画分割</p>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="button" onclick="clicBtn()">分割する</button><br/>
+    </form>
+    
+
+    <form action="{% url  'index' %}">
+      <input id = 'next' type="submit" value="トップページ"/>
+    </form>
+    </script>
+  </body>
+  </html>
