@@ -5,7 +5,6 @@
 ・Django3.1.2  
 ・Python3.8.5  
 ・OpenCV4.4.0  
-・SQLite3.31.1  
 ・pillow7.0.0  
 
 ## アプリの機能  
