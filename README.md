@@ -4,13 +4,13 @@
 3．動画のアップロード  
 
 ## 操作手順   
-git clone https://github.com/j17012/video.git  
-cd video  
-pip3 install -r requirements.txt  
-python3 manage.py migrate  
-python3 manage.py runserver  
-http://localhost:8000/top/  
+1.git clone https://github.com/j17012/video.git  
+2.cd video  
+3.pip3 install -r requirements.txt  
+4.python3 manage.py migrate  
+5.python3 manage.py runserver  
+6.http://localhost:8000/top/  
 
-## エラーと解決策
-ModuleNotFoundWrror:No module named 'skbuild'  
+## エラーとその解決策
+操作手順3.「ModuleNotFoundWrror:No module named 'skbuild'」    
 →pip3 install -U pip  
