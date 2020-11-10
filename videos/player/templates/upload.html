@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit">アップロードする</button>
+    </form>
+
+    {% if download_url %}
+        <a href="{{ download_url }}">{{ download_url }}</a>
+    {% endif %}
+
+    <form action="{% url  'index' %}">
+        <input id = 'next' type="submit" value="動画再生"/>
+    </form>
+    
+    <form action="{% url  'cut' %}">
+        <input id = 'next' type="submit" value="動画分割"/>
+    </form>
+{% endblock %}

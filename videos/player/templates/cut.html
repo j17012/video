@@ -1,0 +1,79 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+    <p>動画分割</p>
+
+    <form action="#" method="post" enctype="multipart/form-data">
+        <p>
+        分割したい動画ファイルを選択して下さい<br/>
+        <input type="file" id="filename" value="ファイル読み込み"/><br/>
+        </p>
+    </form>
+    <button type="button" onclick="clicBtn()">分割する</button><br/>
+
+    <form action="{% url  'index' %}">
+        <input id = 'next' type="submit" value="動画再生"/>
+    </form>
+
+    <form action="{% url  'upload' %}">
+      <input id = 'next' type="submit" value="動画アップロード"/>
+    </form>
+
+    <script>
+      function clicBtn() {
+        var video = document.getElementById("filename").value;
+  
+        $.ajax({
+          url: "{% url 'call_cut' %}",
+          method: 'GET',
+          data: {"input_data": video},
+          contentType: "application/json",
+          mimeType : "video/mp4",
+          beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+          },
+          error: function(xhr, status, error) {
+            console.log("error")
+          }
+        })
+        .done(function(data) {
+          console.log("Success"); 
+        });
+  
+        // csrf_tokenの取得に使う
+        function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+              var cookie = jQuery.trim(cookies[i]);
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+  
+        // ヘッダにcsrf_tokenを付与する関数
+        function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        };
+      }
+  
+    </script>
+  </body>
+  </html>
+
+    
