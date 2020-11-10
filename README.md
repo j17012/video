@@ -11,7 +11,7 @@ cd video
 pip3 install -r requirements.txt
 python3 manage.py migrate  
 python3 manage.py runserver  
-http://localhost:8000//top  
+http://localhost:8000/top  
 
 ## エラーと解決策
 ModuleNotFoundWrror:No module named 'skbuild'  
