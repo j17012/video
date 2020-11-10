@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.http import HttpResponse
-from .forms import SingleUploadForm
+from .forms import UploadForm
 from . import cuts
 
 def index(request):
@@ -14,8 +14,8 @@ def cut(request):
     return render(request, 'app/cut.html')
     
 #動画分割
-class SingleUpload(generic.FormView):
-    form_class = SingleUploadForm
+class Upload(generic.FormView):
+    form_class = UploadForm
     template_name = 'app/cut.html'
 
     def form_valid(self, form):
@@ -27,8 +27,8 @@ class SingleUpload(generic.FormView):
         return self.render_to_response(context)
 
 #動画アップロード
-class SingleUploadView(generic.FormView):
-    form_class = SingleUploadForm
+class UploadView(generic.FormView):
+    form_class = UploadForm
     template_name = 'app/upload.html'
 
     def form_valid(self, form):

@@ -7,7 +7,7 @@ from django.core.files.storage import default_storage
 
 
 
-class SingleUploadForm(forms.Form):
+class UploadForm(forms.Form):
     file = forms.FileField(label='動画ファイル')
 
     def save(self):
