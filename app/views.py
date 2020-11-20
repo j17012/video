@@ -26,7 +26,7 @@ class Upload(generic.FormView):
         }
         return self.render_to_response(context)
     
-    def call_cut_video(request):
+    def call_save_frames(request):
         if request.method == 'POST':
             #cut.pyのsave_framesを呼び出す
             #ajaxで送信したデータのうちimput_dataを指定して取得する
