@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import generic
 from django.http import HttpResponse
-from .forms import UploadForm
+from .forms import  SingleUploadModelForm
+from .cuts import UploadForm
+from .models import UploadFile
 from . import cuts
 
 def index(request):
@@ -12,7 +15,7 @@ def player(request):
 
 def cut(request):
     return render(request, 'app/cut.html')
-    
+
 #動画分割
 class Upload(generic.FormView):
     form_class = UploadForm
@@ -27,14 +30,13 @@ class Upload(generic.FormView):
         return self.render_to_response(context)
 
 #動画アップロード
-class UploadView(generic.FormView):
-    form_class = UploadForm
+class SingleUploadWithModelView(generic.CreateView):
+    #ファイルモデルのアップロードビュー
+    model = UploadFile
+    form_class = SingleUploadModelForm
     template_name = 'app/upload.html'
+    success_url = reverse_lazy('app:file_list')
 
-    def form_valid(self, form):
-        download_url = form.save()
-        context = {
-            'download_url': download_url,
-            'form': form,
-        }
-        return self.render_to_response(context)
+class FileListView(generic.ListView):
+    #アップロードされたファイルの一覧ページ
+    model = UploadFile

@@ -7,15 +7,15 @@
 
     <p>トップページ</p>
 
-    <form action="{% url  'player' %}">
+    <form action="{% url  'app:player' %}">
         <input id = 'next' type="submit" value="動画再生"/>
     </form>
 
-    <form action="{% url  'cut' %}">
+    <form action="{% url  'app:cut' %}">
         <input id = 'next' type="submit" value="動画分割"/>
     </form>
 
-    <form action="{% url  'upload' %}">
+    <form action="{% url  'app:upload' %}">
         <input id = 'next' type="submit" value="動画アップロード"/>
     </form>
 
