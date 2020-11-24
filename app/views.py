@@ -28,6 +28,13 @@ class Upload(generic.FormView):
             'form': form,
         }
         return self.render_to_response(context)
+    
+    def call_save_frames(request):
+        if request.method == 'POST':
+            #cut.pyのsave_framesを呼び出す
+            #ajaxで送信したデータのうちimput_dataを指定して取得する
+            cuts.save_frames(request.POST.get("imput_data"))
+            return HttpResponse()
 
 #動画アップロード
 class SingleUploadWithModelView(generic.CreateView):

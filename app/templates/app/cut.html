@@ -14,10 +14,22 @@
         <button type="button" onclick="clicBtn()">分割する</button><br/>
     </form>
     
-
     <form action="{% url  'index' %}">
       <input id = 'next' type="submit" value="トップページ"/>
     </form>
-    </script>
+
+    <script>
+        function clickBtn() {
+          var  = document.getElementById(video_path).value;
+
+          $.ajax({
+            url: "{% url 'app:call_cut_video' %}",
+            method: 'POST',
+            data: {"input_data": },
+            dataType: "text",
+            contentType: "application/json"
+          }
+      </script>
+    
   </body>
   </html>
