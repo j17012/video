@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,18 +6,18 @@
 </head>
 <body>
 
-    <p>トップページ</p>
+    <h1>トップページ</h1>
 
     <form action="{% url  'app:player' %}">
         <input id = 'next' type="submit" value="動画再生"/>
     </form>
 
-    <form action="{% url  'app:cut' %}">
-        <input id = 'next' type="submit" value="動画分割"/>
-    </form>
-
     <form action="{% url  'app:upload' %}">
         <input id = 'next' type="submit" value="動画アップロード"/>
+    </form>
+
+    <form action="{% url  'app:file_list' %}">
+        <input id = 'next' type="submit" value="動画分割"/>
     </form>
 
 </body>
