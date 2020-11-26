@@ -12,12 +12,4 @@
 
     <form action="{% url  'app:index' %}">
         <input id = 'next' type="submit" value="トップページ"/>
-
-    {% if download_url %}
-        <a href="{{ download_url }}">{{ download_url }}</a>
-    {% endif %}
-
-    {% for download_url in download_url_list %}
-        <p><a href="{{ download_url }}">{{ download_url }}</a></p>
-    {% endfor %}
 {% endblock %}

@@ -11,11 +11,11 @@ def index(request):
 def player(request):
     return render(request, 'app/player.html')
 
-#動画分割
-class UploadListView(generic.ListView):
+#アップロード済み動画ファイル一覧
+class FileListView(generic.ListView):
     #アップロードされたファイルの一覧ページ
     model = UploadFile
-    
+
 #動画アップロード
 class SingleUploadWithModelView(generic.CreateView):
     #ファイルモデルのアップロードビュー
@@ -24,6 +24,3 @@ class SingleUploadWithModelView(generic.CreateView):
     template_name = 'app/upload.html'
     success_url = reverse_lazy('app:file_list')
 
-class FileListView(generic.ListView):
-    #アップロードされたファイルの一覧ページ
-    model = UploadFile
