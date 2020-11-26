@@ -13,7 +13,16 @@
     </form>
 
     <h1>アップロード済みファイルの一覧</h1>
-    {% for uploadfile in uploadfile_list %}
-            <p><a href="{{ uploadfile.file.url }}">{{ uploadfile.file.url }}</a></p>
+    <table border="1">
+      <tr>
+        <th>動画ファイル</th>
+        <th>分割</th>
+      </tr>
+    {% for uploadfile in uploadfile_list %} 
+      <tr>
+        <td><a href="{{ uploadfile.file.url }}">{{ uploadfile.file.url }}</a></td>
+        <td><button type="button">分割する</button></td>
+      </tr>
     {% endfor %}
+  </table>
 {% endblock %}
