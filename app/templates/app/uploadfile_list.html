@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <h1>動画分割</h1>
 
     <form action="{% url  'app:index' %}">
@@ -20,15 +22,22 @@
       </tr>
     {% for uploadfile in uploadfile_list %} 
       <tr>
-        <td><a href="{{ uploadfile.file.url }}" id="target">{{ uploadfile.file.url }}</a></td>
+        <td><a href="{{ uploadfile.file.url }}" class="path" id="target">{{ uploadfile.file.url }}</a></td>
         <td><button type="button" onclick="cut()">分割する</button></td>
       </tr>
     {% endfor %}
   </table>
 
   <script>
+    <!--idに連番付与-->
+    $(function(){
+      $('a.path').each(function(i){
+        $(this).attr('id','target' + (i+1));
+      });
+    });
+
     function cut(){
-      alert(document.getElementById('target'));
+      alert(document.getElementById('target'))
     }
   </script>
 {% endblock %}
