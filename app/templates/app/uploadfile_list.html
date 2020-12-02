@@ -13,6 +13,7 @@
     </form>
 
     <h1>アップロード済みファイルの一覧</h1>
+
         <table border="1">
           <tr>
             <th>動画ファイル</th>
@@ -20,22 +21,36 @@
           </tr>
           {% for uploadfile in uploadfile_list %} 
           <tr>
-            <td><a href="{{ uploadfile.file.url }}" class="path" id="target">{{ uploadfile.file.url }}</a></td>
-            <td><button type="button" onclick="cut()">分割する</button></td>
+            <td><a href="{{ uploadfile.file.url }}" >{{ uploadfile.file.url }}</a></td>
+            <td><button type="button">分割する</button></td>
           </tr>
         {% endfor %}
         </table>
         
   <script>
-    <!--idに連番付与-->
     $(function(){
-      $('a.path').each(function(i){
-        $(this).attr('id','target' + (i+1));
-      });
+      //アップロード済みファイルのidに連番を付与する
+      var target = $('a');
+      for(var i=0; i < target.length; i++){
+        target[i].setAttribute('id','target' + (i+1));
+      }
+      //ボタンのclassに連番を付与する
+      var name = $('button');
+      for(var i=0; i < target.length; i++){
+        name[i].setAttribute('name','btn' + (i+1));
+      }
     });
-
-    function cut(){
-      alert(document.getElementById('target1'))
-    }
+    
+    $(function(){
+      $("btn1").click(function(){
+        alert(document.getElementById("target1"));
+      })
+      $("btn2").click(function(){
+        alert(document.getElementById("target2"));
+      })
+      $("btn3").click(function(){
+        alert(document.getElementById("target3"));
+      })
+    })
   </script>
 {% endblock %}
