@@ -33,35 +33,13 @@
       for(var i=0; i < video.length; i++){
         video[i].setAttribute('id','video' + (i+1));
       }
-      //ボタンのclassに連番を付与する
-      var name = $('button');
-      for(var i=0; i < name.length; i++){
-        name[i].setAttribute('name','btn' + (i+1));
-      }
     });
 
-/*
-    function cut(){
-      alert(document.getElementById("video1"));
-    }
-*/
-
-$("button").click(function(){
-  alert($(this).parents("tr").find("a").text());
-})
-
-    /*
     $(function(){
-      $("btn1").click(function(){
-        alert(document.getElementById("target1"));
-      })
-      $("btn2").click(function(){
-        alert(document.getElementById("target2"));
-      })
-      $("btn3").click(function(){
-        alert(document.getElementById("target3"));
-      })
+      $("button").click(function(){
+      var id = $(this).parents("tr").find("a").text();
+      console.log(id);
+      });
     })
-    */
   </script>
 {% endblock %}

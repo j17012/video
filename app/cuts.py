@@ -36,4 +36,4 @@ def save_frames(video_path: str, frame_dir: str,
         else:
             break
 
-save_frames("target", ".\\frame")
+save_frames("path", ".\\frame")
