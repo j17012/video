@@ -15,7 +15,6 @@ def player(request):
 class FileListView(generic.ListView):
     #アップロードされたファイルの一覧ページ
     model = UploadFile
-
 #動画アップロード
 class SingleUploadWithModelView(generic.CreateView):
     #ファイルモデルのアップロードビュー
@@ -23,4 +22,3 @@ class SingleUploadWithModelView(generic.CreateView):
     form_class = SingleUploadModelForm
     template_name = 'app/upload.html'
     success_url = reverse_lazy('app:file_list')
-
