@@ -1,11 +1,12 @@
 import cv2
 import os
 from os.path import splitext, dirname, basename, join
-from os import makedirs
 from django import forms
 
+#保存する画像の名前と拡張子
 def save_frames(video_path: str, frame_dir: str, 
                 name="image", ext="jpg"):
+    #動画ファイルを読み込む
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         return
@@ -13,9 +14,8 @@ def save_frames(video_path: str, frame_dir: str,
     if frame_dir[-1:] == "\\" or frame_dir[-1:] == "/":
         frame_dir = dirname(frame_dir)
     frame_dir_ = join(frame_dir, v_name)
-
-    makedirs(frame_dir_, exist_ok=True)
-    base_path = join(frame_dir_, name)
+    
+    base_path = join(frame_dir_, name) #出力先ディレクトリとファイル名を結合
 
     idx = 0
     while cap.isOpened():
@@ -35,5 +35,5 @@ def save_frames(video_path: str, frame_dir: str,
                 idx = 0
         else:
             break
-
-save_frames("path", ".\\frame")
+            
+save_frames("id", ".\\frame")

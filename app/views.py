@@ -4,12 +4,20 @@ from django.views import generic
 from django.http import HttpResponse
 from .forms import  SingleUploadModelForm
 from .models import UploadFile
+from . import cuts
 
 def index(request):
     return render(request, 'app/index.html')
 
 def player(request):
     return render(request, 'app/player.html')
+
+def call_cuts(request):
+    if request.method == 'POST':
+        # cuts.pyのsave_frames()メソッドを呼び出す。
+        # ajaxで送信したデータのうち"id"を指定して取得する。
+        cuts.save_frames(request.POST.get("id"))
+        return HttpResponse()
 
 #アップロード済み動画ファイル一覧
 class FileListView(generic.ListView):
