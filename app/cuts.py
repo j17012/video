@@ -1,7 +1,11 @@
 import cv2
+import sys
 import os
 from os.path import splitext, dirname, basename, join
 from django import forms
+
+#Javascriptから送信されたファイルを受け取る
+id = sys.stdin.readline()
 
 #保存する画像の名前と拡張子
 def save_frames(video_path: str, frame_dir: str, 
@@ -36,4 +40,4 @@ def save_frames(video_path: str, frame_dir: str,
         else:
             break
             
-save_frames("id", ".\\frame")
+save_frames(id, ".\\frame")

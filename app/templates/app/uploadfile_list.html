@@ -24,6 +24,7 @@
             <td><a href="{{ uploadfile.file.url }}" >{{ uploadfile.file.url }}</a></td>
             <td><button type="button" >分割する</button></td>
           </tr>
+        {% csrf_token %}
         {% endfor %}
         
   <script>
@@ -38,10 +39,19 @@
     $(function(){
       $("button").click(function(){
       var id = $(this).parents("tr").find("a").text();
-      console.log(id);
-      });
+      console.log(id)
       $.ajax({
-  
-    });    
+        url: "{% url  'app:call_cuts' %}",
+        type: 'POST',
+        data:{"input_data": id} 
+      })
+      .done(function(data){
+        console.log(data);
+        })
+      .fail(function(){
+        console.log('failed');
+        });
+      });
+    });
   </script>
 {% endblock %}
