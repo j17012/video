@@ -11,6 +11,7 @@
 5.python3 manage.py runserver  
 6.http://localhost:8000/top/  
 
-## エラーとその解決策
-操作手順3.「ModuleNotFoundWrror:No module named 'skbuild'」    
-→pip3 install -U pip  
+## 管理画面の使用
+1.python3 manage.py createsuperuser 
+2.python3 manage.py runserver
+3.http://localhost:8000/admin/
