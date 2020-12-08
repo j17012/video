@@ -3,7 +3,7 @@ from django.core.files.storage import default_storage
 from .models import UploadFile
 
 
-class SingleUploadModelForm(forms.ModelForm):
+class UploadForm(forms.ModelForm):
 
     class Meta:
         model = UploadFile

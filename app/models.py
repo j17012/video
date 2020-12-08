@@ -16,3 +16,8 @@ class UploadImage(models.Model):
     def __str__(self):
         """ファイルのURLを返す"""
         return self.file.url
+    
+class LabelInfo(models.Model):
+    """フレーム毎のラベル情報を表すモデル"""
+    txt = models.TextField('テキストファイル')
+    
