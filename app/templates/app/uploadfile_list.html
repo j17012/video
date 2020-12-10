@@ -28,14 +28,6 @@
         {% endfor %}
         
   <script>
-    $(function(){
-      //アップロード済みファイルのidに連番を付与する
-      var video = $('a');
-      for(var i=0; i < video.length; i++){
-        video[i].setAttribute('id','video' + (i+1));
-      }
-    });
-
     //jQueryでCSRFトークンを付与
     function getCookie(name){
       var cookieValue = null;
