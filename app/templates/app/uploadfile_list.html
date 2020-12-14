@@ -55,11 +55,11 @@
       }
     });
 
-    //ボタン押下時にパスを取得し、cuts.pyに渡す
+    //ボタン押下時にパスを取得し、views.pyにデータを送信する
     $(function(){
       $("button").click(function(){
       var id = $(this).parents("tr").find("a").text();
-      console.log(id)
+      //console.log(id)
       $.ajax({
         url: "{% url  'app:call_cuts' %}",
         type: 'POST',
@@ -67,6 +67,7 @@
       })
       .done(function(){
         console.log(id);
+        alert(id);
         })
       .fail(function(){
         console.log('failed');

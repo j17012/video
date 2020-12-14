@@ -1,14 +1,19 @@
 import cv2
-import sys
 import os
 from os.path import splitext, dirname, basename, join
-from django import forms
+from .models import UploadFile, UploadImage
+from project.settings import BASE_DIR
 
 #保存する画像の名前と拡張子
-def save_frames(video_path: str, frame_dir: str, 
+def save_frames(video_path, frame_dir, 
                 name="image", ext="jpg"):
+
+    print(video_path)
+    print(frame_dir)
+
     #動画ファイルを読み込む
     cap = cv2.VideoCapture(video_path)
+
     if not cap.isOpened():
         return
     v_name = splitext(basename(video_path))[0]
@@ -31,10 +36,9 @@ def save_frames(video_path: str, frame_dir: str,
             else:  # 1秒ずつフレームを保存
                 second = int(cap.get(cv2.CAP_PROP_POS_FRAMES)/idx)
                 filled_second = str(second).zfill(4)
+                #　ディレクトリに画像を保存
                 cv2.imwrite("{}_{}.{}".format(base_path, filled_second, ext),
                             frame)
                 idx = 0
         else:
             break
-            
-save_frames("id", "/frame/")

@@ -3,7 +3,8 @@ from django.db import models
 
 class UploadFile(models.Model):
     """アップロードされたファイルを表すモデル"""
-    file = models.FileField('動画ファイル')
+    file = models.FileField('動画ファイル',upload_to="video/")
+    
 
     def __str__(self):
         """ファイルのURLを返す"""
@@ -11,7 +12,7 @@ class UploadFile(models.Model):
 
 class UploadImage(models.Model):
     """アップロードされたファイルを表すモデル"""
-    file = models.ImageField('画像ファイル')  
+    file = models.ImageField(upload_to="frame/")  
 
     def __str__(self):
         """ファイルのURLを返す"""
