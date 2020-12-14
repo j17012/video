@@ -12,7 +12,7 @@ class UploadFile(models.Model):
 
 class UploadImage(models.Model):
     """アップロードされたファイルを表すモデル"""
-    file = models.ImageField(upload_to="frame/")  
+    file = models.ImageField(upload_to="image/")  
 
     def __str__(self):
         """ファイルのURLを返す"""

@@ -2,7 +2,6 @@ import cv2
 import os
 from os.path import splitext, dirname, basename, join
 from .models import UploadFile, UploadImage
-from project.settings import BASE_DIR
 
 #保存する画像の名前と拡張子
 def save_frames(video_path, frame_dir, 
