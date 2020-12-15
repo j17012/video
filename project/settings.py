@@ -123,5 +123,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-FRAME_URL = '/frame/'
-FRAME_ROOT = os.path.join(BASE_DIR, 'frame')
+IMAGE_URL = '/image/'
+IMAGE_ROOT = os.path.join(BASE_DIR, 'image')
+
+VIDEO_URL = '/video/'
+VIDEO_ROOT = os.path.join(BASE_DIR, 'video')

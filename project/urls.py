@@ -24,4 +24,5 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.FRAME_URL, document_root=settings.FRAME_ROOT)
+urlpatterns += static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
+urlpatterns += static(settings.VIDEO_URL, document_root=settings.VIDEO_ROOT)

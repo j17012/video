@@ -1,16 +1,12 @@
-import cv2
 import os
+import cv2
+from os import makedirs
 from os.path import splitext, dirname, basename, join
-from .models import UploadFile, UploadImage
 
-#保存する画像の名前と拡張子
-def save_frames(video_path, frame_dir, 
-                name="image", ext="jpg"):
+def save_frames(video_path: str, frame_dir='./media/image/', name="image", ext="jpg"):
 
-    print(video_path)
-    print(frame_dir)
+    import pdb; pdb.set_trace()
 
-    #動画ファイルを読み込む
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
@@ -19,8 +15,9 @@ def save_frames(video_path, frame_dir,
     if frame_dir[-1:] == "\\" or frame_dir[-1:] == "/":
         frame_dir = dirname(frame_dir)
     frame_dir_ = join(frame_dir, v_name)
-    
-    base_path = join(frame_dir_, name) #出力先ディレクトリとファイル名を結合
+
+    makedirs(frame_dir_, exist_ok=True)
+    base_path = join(frame_dir_, name)
 
     idx = 0
     while cap.isOpened():
@@ -35,7 +32,6 @@ def save_frames(video_path, frame_dir,
             else:  # 1秒ずつフレームを保存
                 second = int(cap.get(cv2.CAP_PROP_POS_FRAMES)/idx)
                 filled_second = str(second).zfill(4)
-                #　ディレクトリに画像を保存
                 cv2.imwrite("{}_{}.{}".format(base_path, filled_second, ext),
                             frame)
                 idx = 0
