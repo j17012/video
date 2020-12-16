@@ -1,11 +1,14 @@
 import os
 import cv2
+import numpy as np
 from os import makedirs
 from os.path import splitext, dirname, basename, join
 
 def save_frames(video_path: str, frame_dir='./media/image/', name="image", ext="jpg"):
 
     import pdb; pdb.set_trace()
+
+    print(video_path)
 
     cap = cv2.VideoCapture(video_path)
 
@@ -25,15 +28,13 @@ def save_frames(video_path: str, frame_dir='./media/image/', name="image", ext="
         ret, frame = cap.read()
         if ret:
             if cap.get(cv2.CAP_PROP_POS_FRAMES) == 1:  # 0秒のフレームを保存
-                cv2.imwrite("{}_{}.{}".format(base_path, "0000", ext),
-                            frame)
+                cv2.imwrite("{}_{}.{}".format(base_path, "0000", ext),frame)
             elif idx < cap.get(cv2.CAP_PROP_FPS):
                 continue
             else:  # 1秒ずつフレームを保存
                 second = int(cap.get(cv2.CAP_PROP_POS_FRAMES)/idx)
                 filled_second = str(second).zfill(4)
-                cv2.imwrite("{}_{}.{}".format(base_path, filled_second, ext),
-                            frame)
+                cv2.imwrite("{}_{}.{}".format(base_path, filled_second, ext),frame)
                 idx = 0
         else:
             break
