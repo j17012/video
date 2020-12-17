@@ -21,7 +21,7 @@
           </tr>
           {% for uploadfile in uploadfile_list %} 
           <tr>
-            <td><a href="{{ uploadfile.file.url }}" >{{ uploadfile.file.url }}</a></td>
+            <td><a href="{{ uploadfile.file.path }}" >{{ uploadfile.file.path }}</a></td>
             <td><button type="button" >分割する</button></td>
           </tr>
         {% csrf_token %}

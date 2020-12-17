@@ -1,3 +1,4 @@
+import os
 from django.db import models
 
 
@@ -7,8 +8,8 @@ class UploadFile(models.Model):
     
 
     def __str__(self):
-        """ファイルのURLを返す"""
-        return self.file.url
+        """ファイルのパスを返す"""
+        return os.path.basename(self.file.path)
 
 class UploadImage(models.Model):
     """アップロードされたファイルを表すモデル"""
