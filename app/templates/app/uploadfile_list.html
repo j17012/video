@@ -26,6 +26,16 @@
           </tr>
         {% csrf_token %}
         {% endfor %}
+        <table border="1">
+          <tr>
+            <th>画像ファイル</th>
+          </tr>
+          {% for uploadimage in uploadfile_list %} 
+          <tr>
+            <td><a href="{{ uploadimage.file.url }}" >{{ uploadimage.file.url }}</a></td>
+          </tr>
+        {% csrf_token %}
+        {% endfor %}
         
   <script>
     //jQueryでCSRFトークンを付与

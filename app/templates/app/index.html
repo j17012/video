@@ -12,6 +12,10 @@
     <input id = 'next' type="submit" value="動画アップロード"/>
 </form>
 
+<form action="{% url  'app:upload_image' %}">
+    <input id = 'next' type="submit" value="画像アップロード"/>
+</form>
+
 <form action="{% url  'app:file_list' %}">
     <input id = 'next' type="submit" value="動画分割"/>
 </form>

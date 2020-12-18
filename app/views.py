@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.http import HttpResponse
-from .forms import  UploadForm
-from .models import UploadFile
+from .forms import  UploadForm, UploadFormSet, UploadMultiForm
+from .models import UploadFile, UploadImage
 from . import cuts
 import os.path
 
@@ -25,10 +25,18 @@ def call_cuts(request):
         #print(request.POST.get("input_data"))
         return HttpResponse(reverse('app:result'))
 
-#アップロード済み動画ファイル一覧
-class FileListView(generic.ListView):
-    #アップロードされたファイルの一覧ページ
-    model = UploadFile
+#画像アップロード
+def mulit_upload(request):
+    formset = UploadFormSet(request.POST or None, files=request.FILES or None, queryset=UploadFile.objects.none())
+    if request.method == 'POST' and formset.is_valid():
+        formset.save()
+        return redirect('app:image_list')
+
+    context = {
+        'form':formset
+    }
+
+    return render(request, 'app/upload.html', context)
 #動画アップロード
 class UploadView(generic.CreateView):
     #ファイルモデルのアップロードビュー
@@ -36,3 +44,8 @@ class UploadView(generic.CreateView):
     form_class = UploadForm
     template_name = 'app/upload.html'
     success_url = reverse_lazy('app:file_list')
+
+#アップロード済み動画ファイル一覧
+class FileListView(generic.ListView):
+    #アップロードされたファイルの一覧ページ
+    model = UploadFile

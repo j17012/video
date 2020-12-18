@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<h1>画像一覧</h1>
+
+    <form action="{% url  'app:index' %}">
+      <input id = 'next' type="submit" value="トップページ"/>
+    </form>
+
+    <h1>アップロード済みファイルの一覧</h1>
+
+        <table border="1">
+          <tr>
+            <th>画像ファイル</th>
+          </tr>
+          {% for uploadimage in uploadfile_list %} 
+          <tr>
+            <td><a href="{{ uploadimage.file.path }}" >{{ uploadfile.image.path }}</a></td>
+          </tr>
+        {% csrf_token %}
+        {% endfor %}
+{% endblock %}
