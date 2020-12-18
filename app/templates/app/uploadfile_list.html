@@ -65,8 +65,10 @@
         type: 'POST',
         data:{"input_data": id} 
       })
-      .done(function(){
+      .done(function(response){
         console.log(id);
+        alert('分割成功\n分割動画結果画面に遷移します')
+        window.location.href = response;
         })
       .fail(function(){
         console.log('failed');

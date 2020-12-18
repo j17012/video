@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.http import HttpResponse
 from .forms import  UploadForm
@@ -13,6 +13,9 @@ def index(request):
 def player(request):
     return render(request, 'app/player.html')
 
+def result(request):
+    return render(request, 'app/result.html')
+
 def call_cuts(request):
     if request.method == 'POST':
         # cuts.pyのsave_frames()メソッドを呼び出す。
@@ -20,7 +23,7 @@ def call_cuts(request):
         cuts.save_frames(request.POST.get("input_data"))
         #import pdb; pdb.set_trace()
         #print(request.POST.get("input_data"))
-        return HttpResponse()
+        return HttpResponse(reverse('app:result'))
 
 #アップロード済み動画ファイル一覧
 class FileListView(generic.ListView):

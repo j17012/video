@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+    <h1>分割動画結果</h1>
+
+    <form action="{% url  'app:index' %}">
+        <input id = 'next' type="submit" value="トップページ"/>
+    </form>
+{% endblock %}

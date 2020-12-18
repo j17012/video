@@ -1,15 +1,12 @@
 import os
 import cv2
-import pathlib
 import numpy as np
 from os import makedirs
 from os.path import splitext, dirname, basename, join
 
-def save_frames(video_path: str, frame_dir='./media/image/', name="image", ext="jpg"):
+def save_frames(video_path: str, frame_dir='./media', name="image", ext="jpg"):
 
-    import pdb; pdb.set_trace()
-
-    print(video_path)
+    #import pdb; pdb.set_trace()
 
     cap = cv2.VideoCapture(video_path)
 

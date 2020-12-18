@@ -8,7 +8,7 @@ class UploadFile(models.Model):
     
 
     def __str__(self):
-        """ファイルのパスを返す"""
+        """ファイルの絶対パスを返す"""
         return os.path.basename(self.file.path)
 
 class UploadImage(models.Model):
