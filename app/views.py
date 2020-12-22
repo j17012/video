@@ -27,7 +27,7 @@ def call_cuts(request):
 
 #画像アップロード
 def mulit_upload(request):
-    formset = UploadFormSet(request.POST or None, files=request.FILES or None, queryset=UploadFile.objects.none())
+    formset = UploadFormSet(request.POST or None, files=request.FILES or None, queryset=UploadImage.objects.none())
     if request.method == 'POST' and formset.is_valid():
         formset.save()
         return redirect('app:image_list')
@@ -49,3 +49,8 @@ class UploadView(generic.CreateView):
 class FileListView(generic.ListView):
     #アップロードされたファイルの一覧ページ
     model = UploadFile
+
+#アップロード済み画像ファイル一覧
+class ImageListView(generic.ListView):
+    #アップロードされたファイルの一覧ページ
+    model = UploadImage

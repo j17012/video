@@ -14,9 +14,9 @@
           <tr>
             <th>画像ファイル</th>
           </tr>
-          {% for uploadimage in uploadfile_list %} 
+          {% for uploadimage in uploadimage_list %} 
           <tr>
-            <td><a href="{{ uploadimage.file.path }}" >{{ uploadfile.image.path }}</a></td>
+            <td><a href="{{ uploadimage.file.path }}" >{{ uploadimage.file.path }}</a></td>
           </tr>
         {% csrf_token %}
         {% endfor %}
