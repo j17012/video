@@ -24,8 +24,9 @@
             <td><a href="{{ uploadfile.file.path }}" >{{ uploadfile.file.path }}</a></td>
             <td><button type="button" >分割する</button></td>
           </tr>
-        {% csrf_token %}
-        {% endfor %}
+          {% csrf_token %}
+          {% endfor %}
+        </table>
 
   <script>
     //jQueryでCSRFトークンを付与
