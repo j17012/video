@@ -15,7 +15,7 @@
     <table border="1">
         {% for uploadimage in result %} 
         <tr>
-          <td><img src=" {{ MEDIA_URL }}{{uploadimage.picture}}" width="200px"></td>
+          <td><img src="{{ uploadimage.file.url }}"/></td>
         </tr>
         {% csrf_token %}
         {% endfor %}

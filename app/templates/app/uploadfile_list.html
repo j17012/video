@@ -16,12 +16,14 @@
 
         <table border="1">
           <tr>
+            <th>動画ファイルのパス</th>
             <th>動画ファイル</th>
             <th>分割</th>
           </tr>
           {% for uploadfile in uploadfile_list %} 
           <tr>
             <td><a href="{{ uploadfile.file.path }}" >{{ uploadfile.file.path }}</a></td>
+            <td><video src="{{ uploadfile.file.url }}" controls witdth="250px" height="250px"></video></td>
             <td><button type="button" >分割する</button></td>
           </tr>
           {% csrf_token %}
