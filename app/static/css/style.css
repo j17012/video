@@ -1,0 +1,106 @@
+/* index.html*/
+.top{
+    text-align: center;
+}
+.index{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+    justify-items: center;
+    background-color: #c4a88d;
+}
+.link{
+    width: 500px;
+    padding: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: xx-large;
+    background: #877666;
+}
+.link a{
+    display: block;
+    height: 100%;
+    background: #877666;
+    color: #fff;
+}
+
+/* upload.html */
+.upload_title {
+    text-align: center;
+    font-size: 150%;
+}
+.upload_videos{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    justify-items: center;
+    background-color: #c4a88d;
+}
+.upload_main{
+    width: 400px;
+    padding: 20px;
+    margin-bottom: 5px;
+    font-size: 150%;
+}
+.upload_btn{
+    width: 100px;
+    height: 30px;
+}
+.upload_menu{
+    width: 300px;
+}
+.upload_form{
+    width: 300px;
+    padding: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: xx-large;
+    background: #877666;
+}
+.upload_form a{
+    display: block;
+    height: 100%;
+    background: #877666;
+    color: #fff;
+}
+
+/* uploadfile_list.html*/
+.list_title {
+    text-align: center;
+    font-size: 150%;
+}
+.upload_list{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 3fr;
+    background-color: #c4a88d;
+}
+.video_list{
+    width: 600px;
+    padding: 20px;
+    margin-bottom: 5px;
+    font-size: 150%;
+}
+.list_menu{
+    width: 300px;
+}
+.list_form{
+    width: 250px;
+    padding: 30px;
+    margin: 35px 0 20px 40px;
+    text-align: center;
+    font-size: xx-large;
+    background: #877666;
+}
+.upload_form a{
+    display: block;
+    height: 100%;
+    background: #877666;
+    color: #fff;
+}
+.cut_btn{
+    width: 100px;
+    height: 50px;
+}
+
+

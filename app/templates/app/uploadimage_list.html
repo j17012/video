@@ -16,7 +16,8 @@
           </tr>
           {% for uploadimage in uploadimage_list %} 
           <tr>
-            <td><a href="{{ uploadimage.file.url }}" >{{ uploadimage.file.url }}</a></td>
+            <!-- <td><a href="{{ uploadimage.file.url }}" >{{ uploadimage.file.url }}</a></td> -->
+            <td><img src="{{ uploadimage.file.url }}" width="250px" height="250px"><br>{{ uploadimage.file.url }} </td>
           </tr>
           {% csrf_token %}
           {% endfor %}

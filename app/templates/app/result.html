@@ -12,12 +12,5 @@
         <input id = 'next' type="submit" value="画像アップロード"/>
     </form>
 
-    <table border="1">
-        {% for uploadimage in result %} 
-        <tr>
-          <td><img src="{{ uploadimage.file.url }}"/></td>
-        </tr>
-        {% csrf_token %}
-        {% endfor %}
-    </table>
+    
 {% endblock %}

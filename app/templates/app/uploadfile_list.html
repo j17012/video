@@ -1,34 +1,38 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
+<h1 class="list_title">アップロード済みファイルの一覧</h1>
 
-<h1>動画分割</h1>
+<div class="upload_list">
+  <div class="list_menu">
+    <div class="list_form">
+      <a href="{% url  'app:index' %}">トップページ</a>
+    </div>
 
-    <form action="{% url  'app:index' %}">
-      <input id = 'next' type="submit" value="トップページ"/>
-    </form>
+    <div class="list_form">
+      <a href="{% url  'app:upload' %}">動画アップロード</a>
+    </div>
+  </div>
 
-    <form action="{% url  'app:upload' %}">
-        <input id = 'next' type="submit" value="動画アップロード"/>
-    </form>
-
-    <h1>アップロード済みファイルの一覧</h1>
-
-        <table border="1">
-          <tr>
-            <th>動画ファイルのパス</th>
-            <th>動画ファイル</th>
-            <th>分割</th>
-          </tr>
-          {% for uploadfile in uploadfile_list %} 
-          <tr>
-            <td><a href="{{ uploadfile.file.path }}" >{{ uploadfile.file.path }}</a></td>
-            <td><video src="{{ uploadfile.file.url }}" controls witdth="250px" height="250px"></video></td>
-            <td><button type="button" >分割する</button></td>
-          </tr>
-          {% csrf_token %}
-          {% endfor %}
-        </table>
+  <div class="video_list">
+    <table border="1">
+      <tr>
+        <th>動画ファイルのパス</th>
+        <th>動画ファイル</th>
+        <th>分割</th>
+      </tr>
+      {% for uploadfile in uploadfile_list %} 
+      <tr>
+        <td><a href="{{ uploadfile.file.path }}" >{{ uploadfile.file.path }}</a></td>
+        <td><video src="{{ uploadfile.file.url }}" controls witdth="250px" height="250px" type="video/mp4"></video></td>
+        <td><button type="button" class="cut_btn">分割する</button></td>
+      </tr>
+      {% csrf_token %}
+      {% endfor %}
+    </table>
+  </div>
+</div>
 
   <script>
     //jQueryでCSRFトークンを付与
