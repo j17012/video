@@ -1,23 +1,25 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
+    <div class="player">
+        <div class="video">
+            <!--動画再生部分-->
+            <video id="video" height="480" controls></video><br/>
+            <!--動画ファイルを選択する-->
+            <p>ファイルを選択して下さい<br/></p>
+            <input type="file" id="filename" value="ファイル読み込み"/><br/>
+            <!--再生位置の表示-->
+            再生位置  :<span id="position">-</span><br/>
+            </div>
 
-<p>動画再生</p>
+            <div class="label">
+                <canvas id="ex_chart"></canvas>
+            </div>
 
-    <!--動画再生部分-->
-    <video id="video" height="480" controls></video><br/>
-    <!--動画ファイルを選択する-->
-    <p>ファイルを選択して下さい<br/></p>
-    <input type="file" id="filename" value="ファイル読み込み"/><br/>
-    <!--再生ボタン-->
-    <input type="button" value="再生" onClick="play()"/>
-    <!--停止ボタン-->
-    <input type="button" value="停止" onClick="pause()"/><br/>
-    <!--再生位置の表示-->
-    再生位置  :<span id="position">-</span><br/>
-
-    <form action="{% url  'app:index' %}">
-        <input id = 'next' type="submit" value="トップページ"/>
+            <div class="video_link">
+                <a href="{% url  'app:index' %}">トップページ</a>
+            </div>
+    </div>
 
         <script>
 
@@ -36,21 +38,38 @@
                     document.getElementById("position").innerHTML = v.currentTime;
                 }, false);
             }
-            //動画の再生
-            function play() {
-                var v = document.getElementById("video");
-                if  ( v == null || v.src == null ) return;
-                v.play();
-            }
-            //動画の一時停止
-            function pause() {
-                var v = document.getElementById("video");
-                if  ( v == null || v.src == null ) return;
-                v.pause();
-            }
-        
+    
             init()
-        
+
+            //ラベルバーの生成
+            var ctx = document.getElementById('ex_chart');
+
+            var data = {
+                labels: ["man", "pc_chara", "white_board", "chara_red", "chara_yellow", "human_chara"],
+                datasets: [{
+                    data:[20, 20, 30, 40, 30, 40, 60],
+                    backgraoundColor: "rgba(255, 100, 100, 1)"
+                }]
+            };
+
+            var options = {
+                scales: {
+                    legend: {
+                        display: false
+                    },
+                    xAxes: [{
+                        ticks: {
+                            min: 0
+                        }
+                    }]
+                }
+            };
+
+            var ex_chart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: data,
+                options: options
+            });
             </script>
 {% endblock %}
 
