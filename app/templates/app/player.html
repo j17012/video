@@ -4,13 +4,11 @@
     <div class="player">
         <div class="video">
             <!--動画再生部分-->
-            <video id="video" height="480" controls></video><br/>
+            <video id="video" width="1215" height="480" controls></video><br/>
             <!--動画ファイルを選択する-->
             <p>ファイルを選択して下さい<br/></p>
             <input type="file" id="filename" value="ファイル読み込み"/><br/>
-            <!--再生位置の表示-->
-            再生位置  :<span id="position">-</span><br/>
-            </div>
+        </div>
 
             <div class="label">
                 <canvas id="ex_chart"></canvas>
@@ -32,43 +30,91 @@
                     document.querySelector('video').src = URL.createObjectURL(file);
                     document.getElementById('filename').innerHTML = document.querySelector('video').src;
                 }, false );
-                //動画の現在の再生位置を表示する
-                    var v = document.getElementById("video");
-                    v.addEventListener("timeupdate", function(){
-                    document.getElementById("position").innerHTML = v.currentTime;
-                }, false);
             }
     
             init()
 
             //ラベルバーの生成
-            var ctx = document.getElementById('ex_chart');
-
-            var data = {
-                labels: ["man", "pc_chara", "white_board", "chara_red", "chara_yellow", "human_chara"],
-                datasets: [{
-                    data:[20, 20, 30, 40, 30, 40, 60],
-                    backgraoundColor: "rgba(255, 100, 100, 1)"
-                }]
-            };
-
-            var options = {
-                scales: {
-                    legend: {
-                        display: false
+            var ar = [
+                moment("1970-01-01 00:00:21.000 +0000", "YYYY-MM-DD HH:mm:ss.SSS Z").format('x'),
+                moment("1970-01-01 00:00:14.000 +0000", "YYYY-MM-DD HH:mm:ss.SSS Z").format('x'),
+                moment("1970-01-01 00:00:36.000 +0000", "YYYY-MM-DD HH:mm:ss.SSS Z").format('x'),
+                moment("1970-01-01 00:00:53.000 +0000", "YYYY-MM-DD HH:mm:ss.SSS Z").format('x'),
+                moment("1970-01-01 00:00:47.000 +0000", "YYYY-MM-DD HH:mm:ss.SSS Z").format('x'),
+                moment("1970-01-01 00:01:20.000 +0000", "YYYY-MM-DD HH:mm:ss.SSS Z").format('x')
+            ];
+            var ctx = document.getElementById("ex_chart").getContext("2d");
+            var chart = new Chart(ctx, {
+                type: "horizontalBar",
+                data: {
+                    labels: ["経過時間" ],
+                    datasets: [{
+                        label: "man",
+                        data: [ar[0], ],
+                        backgroundColor: "rgba(255, 0, 0, 0.8)",
+                        borderWidth: 0
+                    }, {
+                        label: "pc_chara",
+                        data: [ar[1], ],
+                        backgroundColor: "rgba(0, 255, 0, 0.8)",
+                        borderWidth: 0
+                    }, {
+                        label: "white_board",
+                        data: [ar[2], ],
+                        backgroundColor: "rgba(255, 153, 51, 0.8)",
+                        borderWidth: 0
+                    },{
+                        label: "chara_red",
+                        data: [ar[3], ],
+                        backgroundColor: "rgba(255, 255, 0, 0.8)",
+                        borderWidth: 0
+                    }, {
+                        label: "chara_yellow",
+                        data: [ar[4], ],
+                        backgroundColor: "rgba(128, 0, 128, 0.8)",
+                        borderWidth: 0
+                    }, {
+                        label: "human_chara",
+                        data: [ar[5], ],
+                        backgroundColor: "rgba(0, 255, 255, 0.8)",
+                        borderWidth: 0
+                    } ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend:{
+                        //position: 'left'
                     },
-                    xAxes: [{
-                        ticks: {
-                            min: 0
-                        }
-                    }]
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                let value = Number(tooltipItem.value);
+                                let index = tooltipItem.datasetIndex;
+                                let label = data.datasets[index].label;
+                                let duration = moment(value, "x").format("m 分 s 秒 SSS");
+                                return label + ":  " + duration;
+                            }
+                        },
+                        position: "nearest"
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 20,
+                                stepSize: 10000,
+                                min: 0,
+                                callback: function(label, index, labels) {
+                                    let duration = moment(label, "x").format("mm:ss");
+                                    return duration;
+                                }
+                            }
+                        }],
+                        yAxes: [{
+                            display: false,
+                            categoryPercentage: 1.1
+                        }]
+                    },
                 }
-            };
-
-            var ex_chart = new Chart(ctx, {
-                type: 'horizontalBar',
-                data: data,
-                options: options
             });
             </script>
 {% endblock %}
