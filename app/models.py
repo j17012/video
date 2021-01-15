@@ -18,7 +18,13 @@ class UploadImage(models.Model):
         """ファイルの絶対パスを返す"""
         return os.path.abspath(self.file.url)
     
-class LabelInfo(models.Model):
+class Label_Info(models.Model):
     """フレーム毎のラベル情報を表すモデル"""
-    txt = models.TextField('テキストファイル')
-    
+    sec = models.IntegerField(null=True,blank=True)
+    man = models.IntegerField(null=True,blank=True)
+    pc_char = models.IntegerField(null=True,blank=True)
+    white_board = models.IntegerField(null=True,blank=True)
+    char_red = models.IntegerField(null=True,blank=True)
+    char_yellow = models.IntegerField(null=True,blank=True)
+    human_char = models.IntegerField(null=True,blank=True)
+

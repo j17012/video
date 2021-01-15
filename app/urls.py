@@ -12,4 +12,5 @@ urlpatterns = [
     path('image_list/', views.ImageListView.as_view(), name='image_list'),
     path('result/', views.result, name='result'),
     path('ajax/', views.call_cuts, name='call_cuts'),
+    path('label_list/',views.label,name='label_list'),
 ]

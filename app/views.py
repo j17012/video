@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.http import HttpResponse
 from .forms import  UploadForm, UploadFormSet, UploadMultiForm
-from .models import UploadFile, UploadImage
+from .models import UploadFile, UploadImage, Label_Info
 from . import cuts
 import os.path
 
@@ -54,3 +54,8 @@ class FileListView(generic.ListView):
 class ImageListView(generic.ListView):
     #アップロードされたファイルの一覧ページ
     model = UploadImage
+
+def label(request):
+    data = Label_Info.objects.all()
+    params = {'data':data}
+    return render(request,'app/label_list.html',params)
