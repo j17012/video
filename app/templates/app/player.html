@@ -10,13 +10,39 @@
             <input type="file" id="filename" value="ファイル読み込み"/><br/>
         </div>
 
-            <div class="label">
-                <canvas id="ex_chart"></canvas>
-            </div>
+        <div class="label">
+            <canvas id="ex_chart"></canvas>
+        </div>
 
-            <div class="video_link">
-                <a href="{% url  'app:index' %}">トップページ</a>
-            </div>
+        <div class="label_info">
+            <h2>ラベル情報</h2>
+            <table border="1">
+                <tr>
+                    <th>{{ Label_info.sec }}</th>
+                    <th>man</th>
+                    <th>pc_char</th>
+                    <th>white_board</th>
+                    <th>char_red</th>
+                    <th>char_yellow</th>
+                    <th>human_char</th>
+                </tr>
+                {% for Label_info in data %}
+                <tr>
+                    <td>{{ Label_info.sec }}</td>
+                    <td>{{ Label_info.man }}</td>
+                    <td>{{ Label_info.pc_char }}</td>
+                    <td>{{ Label_info.white_board }}</td>
+                    <td>{{ Label_info.char_red }}</td>
+                    <td>{{ Label_info.char_yellow }}</td>
+                    <td>{{ Label_info.human_char }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="video_link">
+            <a href="{% url  'app:index' %}">トップページ</a>
+        </div>
     </div>
 
         <script>

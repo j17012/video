@@ -11,7 +11,9 @@ def index(request):
     return render(request, 'app/index.html')
 
 def player(request):
-    return render(request, 'app/player.html')
+    data = Label_Info.objects.all()
+    params = {'data':data}
+    return render(request,'app/player.html',params)
 
 def result(request):
     return render(request, 'app/result.html')
@@ -55,6 +57,7 @@ class ImageListView(generic.ListView):
     #アップロードされたファイルの一覧ページ
     model = UploadImage
 
+#ラベル情報一覧
 def label(request):
     data = Label_Info.objects.all()
     params = {'data':data}
