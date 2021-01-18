@@ -12,6 +12,6 @@
 6.http://localhost:8000/top/  
 
 ## 管理画面の使用
-1.python3 manage.py createsuperuser 
-2.python3 manage.py runserver
-3.http://localhost:8000/admin/
+1.python3 manage.py createsuperuser   
+2.python3 manage.py runserver    
+3.http://localhost:8000/admin/  　　
