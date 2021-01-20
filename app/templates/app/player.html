@@ -11,7 +11,8 @@
         </div>
 
         <div class="label">
-            <canvas id="ex_chart"></canvas>
+            <!-- <canvas id="ex_chart"></canvas> -->
+            <img src="{% url 'app:plot' %}">
         </div>
 
         <div class="label_info">
@@ -59,7 +60,7 @@
             }
     
             init()
-
+            /*
             //ラベルバーの生成
             var ar = [
                 moment("1970-01-01 00:00:21.000 +0000", "YYYY-MM-DD HH:mm:ss.SSS Z").format('x'),
@@ -139,6 +140,7 @@
                     },
                 }
             });
+            */
             </script>
 {% endblock %}
 

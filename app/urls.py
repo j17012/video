@@ -13,4 +13,5 @@ urlpatterns = [
     path('result/', views.result, name='result'),
     path('ajax/', views.call_cuts, name='call_cuts'),
     path('label_list/',views.label,name='label_list'),
+    path('plot/', views.get_svg, name='plot')
 ]
