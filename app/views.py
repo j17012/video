@@ -59,8 +59,29 @@ class ImageListView(generic.ListView):
     #アップロードされたファイルの一覧ページ
     model = UploadImage
 
-#ラベル情報一覧
+#ラベル情報一覧(テーブル情報のみ表示)
 def label(request):
     data = Label_Info.objects.all()
     params = {'data':data}
     return render(request,'app/label_list.html',params)
+
+#ラベル管理画面
+def label_list(request):
+    if 'csv' in request.FILES:
+        form_data = TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')
+        csv_file = csv.reader(form_data)
+        for line in csv_file:
+            label = Label_Info()
+            label.sec = line[0]
+            label.man = line[1]
+            label.pc_char = line[2]
+            label.white_board = line[3]
+            label.char_red = line[4]
+            label.char_yellow = line[5]
+            label.human_char = line[6]
+            label.save()
+
+        return render(request,'app/label_list.html')
+    
+    else:
+        return render(request,'app/label_list.html')
