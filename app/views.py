@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from .forms import  UploadForm, UploadFormSet, UploadMultiForm
 from .models import UploadFile, UploadImage, Label_Info
 from . import cuts
+import csv
+from io import TextIOWrapper, StringIO
 import os.path
 
 def index(request):
