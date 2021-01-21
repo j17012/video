@@ -8,6 +8,7 @@ from . import cuts
 from io import TextIOWrapper, StringIO
 import csv
 import io
+import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -95,11 +96,12 @@ def label(request):
 
 #グラフ作成
 def setPlt():
-    x = ["07/01", "07/02", "07/03", "07/04", "07/05", "07/06", "07/07"]
-    y = [3, 5, 0, 5, 6, 10, 2]
-    plt.bar(x, y, color='#00d5ff')
-    plt.xlabel("Date")
-    plt.ylabel("km")
+    x = np.arange(0,6,1)
+    y = np.arange(0,6,1)
+    f = np.array([1,0,1,0,1,1])
+
+    for i in range(len(x)):
+        plt.plot(x[i:i+2],y[i:i+2], color = 'red' if f[i] == 0 else 'white')
 
 # SVG化
 def plt2svg():
