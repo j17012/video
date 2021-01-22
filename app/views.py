@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import os.path
 
 
@@ -96,12 +97,12 @@ def label(request):
 
 #グラフ作成
 def setPlt():
-    x = np.arange(0,6,1)
-    y = np.arange(0,6,1)
-    f = np.array([1,0,1,0,1,1])
+    x = [1, 2, 3, 4, 5, 6]
+    y = [5, 6, 7, 10, 9, 10]
+    label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
 
-    for i in range(len(x)):
-        plt.plot(x[i:i+2],y[i:i+2], color = 'red' if f[i] == 0 else 'white')
+    plt.barh(x, y, align="center")           # 中央寄せで棒グラフ作成
+    plt.yticks(x, label_x)  # X軸のラベル
 
 # SVG化
 def plt2svg():
