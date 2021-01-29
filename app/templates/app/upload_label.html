@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<h1>ラベル情報アップロード画面</h1>
+
+<div class="label_upload">
+  <form action="{% url 'app:upload_label' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" class="dropify" data-default-file="ファイルを選択してください" name="csv">
+    <button type="submit" class="btn" name="button">アップロード</button>
+  </form>  
+</div>
+<div class="label_link">
+  <a href="{% url  'app:index' %}">トップページ</a>
+</div>
+
+{% endblock content %}

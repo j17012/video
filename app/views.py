@@ -13,6 +13,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from datetime import datetime as dt 
 import os.path
 
 
@@ -74,7 +75,7 @@ def label(request):
     return render(request,'app/label_list.html',params)
 """
 
-#ラベル管理画面
+#ラベルアップロード画面
 def label(request):
     if 'csv' in request.FILES:
         form_data = TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')
@@ -90,19 +91,23 @@ def label(request):
             label.human_char = line[6]
             label.save()
 
-        return render(request,'app/label_list.html')
+        return render(request,'app/upload_label.html')
     
     else:
-        return render(request,'app/label_list.html')
+        return render(request,'app/upload_label.html')
 
 #グラフ作成
 def setPlt():
-    x = [1, 2, 3, 4, 5, 6]
-    y = [5, 6, 7, 10, 9, 10]
-    label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
+    x = [0, 2, 3, 4, 5, 6]
+    y = [0, 10, 25, 35, 50, 65]
 
-    plt.barh(x, y, align="center")           # 中央寄せで棒グラフ作成
+    label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
+    label_y = ["00:00","00:15","00:30","00:45","01:00","01:15"]
+
+    plt.figure(figsize=(12, 4))
+    plt.barh(x, y) 
     plt.yticks(x, label_x)  # X軸のラベル
+    plt.xticks(y,label_y)   # y軸ラベル
 
 # SVG化
 def plt2svg():

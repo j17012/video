@@ -1,5 +1,4 @@
 {% extends 'app/base.html' %}
-{% load static %}
 
 {% block content %}
     
@@ -9,7 +8,8 @@
     <div class="link">
         <a href="{% url  'app:player' %}">動画再生</a>
     </div>
-
+    
+    <!--
     <div class="link">
         <a href="{% url  'app:upload' %}">動画アップロード</a>
     </div>
@@ -20,13 +20,13 @@
     <div class="link">
         <a href="{% url 'app:file_list' %}">動画分割</a>
     </div>
-
     <div class="link">
         <a href="{% url  'app:result' %}">結果動画画面</a>
     </div>
+    -->
 
     <div class="link">
-        <a href="{% url  'app:label_list' %}">ラベル情報アップロード</a>
+        <a href="{% url  'app:upload_label' %}">ラベル情報アップロード</a>
     </div>
 </div>
 {% endblock %}
