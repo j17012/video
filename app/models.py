@@ -21,7 +21,7 @@ class UploadImage(models.Model):
 class Label_Info(models.Model):
     """フレーム毎のラベル情報を表すモデル"""
     ###mov_name = models.CharField('動画名', blank=True, max_length=100)###
-    sec = models.IntegerField('時間', blank=True, null=True)
+    sec = models.TimeField('時間', blank=True, null=True)
     man = models.IntegerField('男性', blank=True, null=True)
     pc_char = models.IntegerField('PC', blank=True, null=True)
     white_board = models.IntegerField('白板', blank=True, null=True)

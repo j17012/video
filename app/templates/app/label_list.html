@@ -1,23 +1,14 @@
-{% extends "app/base.html" %}
-{% load static %}
-{% block title %}学習データアップロード{% endblock %}
-{% block extrahead %}
-<script>
-$(function(){
-  $('.dropify').dropify();
-})
-</script>
-{% endblock %}
+{% extends 'app/base.html' %}
 
 {% block content %}
-<h3>ラベル情報アップロード画面</h3>
+<h1>ラベル情報アップロード画面</h1>
 <form action="{% url  'app:index' %}">
   <input id = 'next' type="submit" value="トップページ"/>
 </form>
 
-<form action="{% url 'app:label_list' %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'app:upload_label' %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  <input type="file" class="dropify" data-default-file="ファイルを選択してください" name="csv">
+  <input type="file" data-default-file="ファイルを選択してください" name="csv">
   <button type="submit" class="btn" name="button">アップロード</button>
 </form>
 

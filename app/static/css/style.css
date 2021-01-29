@@ -49,19 +49,23 @@ body{
 .video_link{
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    width: 200px;
-    height: 50px;
-    padding: 20px;
-    margin-bottom: 5px;
-    text-align: center;
-    font-size: xx-large;
-    background: #877666;
 }
-.video_link a{
-    display: block;
-    height: 100%;
-    background: #877666;
-    color: #fff;
+/* upload_label.html */
+.upload_label_title{
+    text-align: center;
+    font-size: 150%;
+}
+.label_upload{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.upoload_label{
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+}
+.label_link{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
 }
 /* upload.html */
 .upload_title {
@@ -139,5 +143,4 @@ body{
     width: 100px;
     height: 50px;
 }
-
 

@@ -27,22 +27,26 @@
                     <th>char_yellow</th>
                     <th>human_char</th>
                 </tr>
-                {% for Label_info in data %}
+                {% for Label_Info in data %}
                 <tr>
-                    <td>{{ Label_info.sec }}</td>
-                    <td>{{ Label_info.man }}</td>
-                    <td>{{ Label_info.pc_char }}</td>
-                    <td>{{ Label_info.white_board }}</td>
-                    <td>{{ Label_info.char_red }}</td>
-                    <td>{{ Label_info.char_yellow }}</td>
-                    <td>{{ Label_info.human_char }}</td>
+                    <td>{{ Label_Info.sec |time:"i:s" }}</td>
+                    <td>{{ Label_Info.man }}</td>
+                    <td>{{ Label_Info.pc_char }}</td>
+                    <td>{{ Label_Info.white_board }}</td>
+                    <td>{{ Label_Info.char_red }}</td>
+                    <td>{{ Label_Info.char_yellow }}</td>
+                    <td>{{ Label_Info.human_char }}</td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
-
         <div class="video_link">
-            <a href="{% url  'app:index' %}">トップページ</a>
+            <div class="link">
+                <a href="{% url  'app:index' %}">トップページ</a>
+            </div>
+            <div class="link">
+                <a href="{% url  'app:upload_label' %}">ラベル情報アップロード</a>
+            </div>
         </div>
     </div>
 
