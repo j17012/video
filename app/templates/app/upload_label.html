@@ -7,7 +7,7 @@
 <div class="label_upload">
   <form action="{% url 'app:upload_label' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="file" class="dropify" data-default-file="ファイルを選択してください" name="csv">
+    <input type="file" data-default-file="ファイルを選択してください" name="csv">
     <button type="submit" class="btn" name="button">アップロード</button>
   </form>  
 </div>
