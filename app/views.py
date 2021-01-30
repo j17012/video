@@ -98,7 +98,10 @@ def label(request):
 
 #グラフ作成
 def setPlt():
+    """
+    #Label_Infoのman,pc_char,white_board,char_red,char_yellow,human_charを変数で設定する記述をする
     x = [0, 2, 3, 4, 5, 6]
+    #Label_Infoのsecをi:s(n分n秒)で設定する記述をする
     y = [0, 10, 25, 35, 50, 65]
 
     label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
@@ -108,7 +111,15 @@ def setPlt():
     plt.barh(x, y) 
     plt.yticks(x, label_x)  # X軸のラベル
     plt.xticks(y,label_y)   # y軸ラベル
+    """
+    X = np.arange(0,11,1)
+    Y = np.arange(0,11,1)
+    F = np.array([0,0,0,0,0,0,1,1,0,1,0])
 
+    # １線分ずつ色を変えてplotする
+    for i in range(len(X)):
+        plt.plot(X[i:i+2], Y[i:i+2], color= 'red' if F[i] == 0 else 'blue')
+    
 # SVG化
 def plt2svg():
     buf = io.BytesIO()
