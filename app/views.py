@@ -98,20 +98,42 @@ def label(request):
 
 #グラフ作成
 def setPlt():
-    """
+    data = Label_Info.objects.all()
+
+    sec = [ Label_Info.sec for Label_Info in data]
+    man = [ Label_Info.man for Label_Info in data ]
+    pc_char = [Label_Info.pc_char for Label_Info in data ]
+    white_board = [ Label_Info.white_board for Label_Info in data ]
+    char_red = [Label_Info.char_red for Label_Info in data ]
+    char_yellow = [Label_Info.char_yellow for Label_Info in data]
+    human_char = [Label_Info.human_char for Label_Info in data ]
+
+    
     #Label_Infoのman,pc_char,white_board,char_red,char_yellow,human_charを変数で設定する記述をする
-    x = [0, 2, 3, 4, 5, 6]
+    x = [man,pc_char,white_board,char_red,char_yellow,human_char]
     #Label_Infoのsecをi:s(n分n秒)で設定する記述をする
-    y = [0, 10, 25, 35, 50, 65]
+    y = [sec]
 
     label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
-    label_y = ["00:00","00:15","00:30","00:45","01:00","01:15"]
-
+    label_y = [sec]
+    #グラフを生成する範囲
     plt.figure(figsize=(12, 4))
-    plt.barh(x, y) 
-    plt.yticks(x, label_x)  # X軸のラベル
+
+    plt.barh(x,y)
+
+    plt.yticks(x,label_x)  # X軸のラベル
     plt.xticks(y,label_y)   # y軸ラベル
+
     """
+    #折れ線グラフ
+    plt.plot(man,linewidth=4,color="darkred",label="man")
+    plt.plot(pc_char,linewidth=4,color="green")
+    plt.plot(white_board,linewidth=4,color="orange")
+    plt.plot(char_red,linewidth=4,color="red")
+    plt.plot(char_yellow,linewidth=4,color="yellow")
+    plt.plot(human_char,linewidth=4,color="blue")
+    
+    #直線グラフ
     X = np.arange(0,11,1)
     Y = np.arange(0,11,1)
     F = np.array([0,0,0,0,0,0,1,1,0,1,0])
@@ -119,6 +141,7 @@ def setPlt():
     # １線分ずつ色を変えてplotする
     for i in range(len(X)):
         plt.plot(X[i:i+2], Y[i:i+2], color= 'red' if F[i] == 0 else 'blue')
+    """
     
 # SVG化
 def plt2svg():
