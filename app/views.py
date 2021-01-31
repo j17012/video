@@ -98,8 +98,9 @@ def label(request):
 
 #グラフ作成
 def setPlt():
+    #格納されているラベル情報を全件取得
     data = Label_Info.objects.all()
-
+    #各ラベル情報を取得
     sec = [ Label_Info.sec for Label_Info in data]
     man = [ Label_Info.man for Label_Info in data ]
     pc_char = [Label_Info.pc_char for Label_Info in data ]
@@ -108,7 +109,7 @@ def setPlt():
     char_yellow = [Label_Info.char_yellow for Label_Info in data]
     human_char = [Label_Info.human_char for Label_Info in data ]
 
-    
+    """
     #Label_Infoのman,pc_char,white_board,char_red,char_yellow,human_charを変数で設定する記述をする
     x = [man,pc_char,white_board,char_red,char_yellow,human_char]
     #Label_Infoのsecをi:s(n分n秒)で設定する記述をする
@@ -116,15 +117,15 @@ def setPlt():
 
     label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
     label_y = [sec]
-    #グラフを生成する範囲
-    plt.figure(figsize=(12, 4))
-
+    
     plt.barh(x,y)
 
     plt.yticks(x,label_x)  # X軸のラベル
     plt.xticks(y,label_y)   # y軸ラベル
-
     """
+    #グラフを生成する範囲
+    plt.figure(figsize=(12, 4))
+
     #折れ線グラフ
     plt.plot(man,linewidth=4,color="darkred",label="man")
     plt.plot(pc_char,linewidth=4,color="green")
@@ -133,6 +134,7 @@ def setPlt():
     plt.plot(char_yellow,linewidth=4,color="yellow")
     plt.plot(human_char,linewidth=4,color="blue")
     
+    """
     #直線グラフ
     X = np.arange(0,11,1)
     Y = np.arange(0,11,1)
