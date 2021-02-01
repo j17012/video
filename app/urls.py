@@ -10,6 +10,7 @@ urlpatterns = [
     path('upload_image/', views.mulit_upload, name='upload_image'),
     path('file_list/', views.FileListView.as_view(), name='file_list'),
     path('image_list/', views.ImageListView.as_view(), name='image_list'),
+    path('label_list/',views.label_list,name='label_list'),
     path('result/', views.result, name='result'),
     path('ajax/', views.call_cuts, name='call_cuts'),
     path('upload_label/',views.label,name='upload_label'),

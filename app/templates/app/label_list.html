@@ -1,15 +1,42 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-<h1>ラベル情報アップロード画面</h1>
-<form action="{% url  'app:index' %}">
-  <input id = 'next' type="submit" value="トップページ"/>
-</form>
-
-<form action="{% url 'app:upload_label' %}" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="file" data-default-file="ファイルを選択してください" name="csv">
-  <button type="submit" class="btn" name="button">アップロード</button>
-</form>
-
-{% endblock content %}
+<h1 class="label_list_title">ラベル情報</h1>
+<div class="label_list">
+  <div class="label_table">
+    <table border="1">
+      <tr>
+          <th>sec</th>
+          <th>man</th>
+          <th>pc_char</th>
+          <th>white_board</th>
+          <th>char_red</th>
+          <th>char_yellow</th>
+          <th>human_char</th>
+      </tr>
+      {% for Label_info in data %}
+        <tr>
+          <td>{{ Label_info.sec | time:"i:s"}}</td>
+          <td>{{ Label_info.man }}</td>
+          <td>{{ Label_info.pc_char }}</td>
+          <td>{{ Label_info.white_board }}</td>
+          <td>{{ Label_info.char_red }}</td>
+          <td>{{ Label_info.char_yellow }}</td>
+          <td>{{ Label_info.human_char }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="label_link">
+    <div class="link">
+      <a href="{% url  'app:index' %}">トップページ</a>
+    </div>
+    <div class="link">
+      <a href="{% url  'app:player' %}">結果動画画面</a>
+    </div>
+   <div class="link">
+    <a href="{% url  'app:upload_label' %}">ラベル情報アップロード</a>
+    </div>
+  </div>  
+</div>
+{% endblock %} 

@@ -67,13 +67,13 @@ class ImageListView(generic.ListView):
     #アップロードされたファイルの一覧ページ
     model = UploadImage
 
-"""
+
 #ラベル情報一覧(テーブル情報のみ表示)
-def label(request):
+def label_list(request):
     data = Label_Info.objects.all()
     params = {'data':data}
     return render(request,'app/label_list.html',params)
-"""
+
 
 #ラベルアップロード画面
 def label(request):
@@ -128,11 +128,11 @@ def setPlt():
 
     #折れ線グラフ
     plt.plot(man,linewidth=4,color="darkred",label="man")
-    plt.plot(pc_char,linewidth=4,color="green")
-    plt.plot(white_board,linewidth=4,color="orange")
-    plt.plot(char_red,linewidth=4,color="red")
-    plt.plot(char_yellow,linewidth=4,color="yellow")
-    plt.plot(human_char,linewidth=4,color="blue")
+    plt.plot(pc_char,linewidth=4,color="green",label="pc_char")
+    plt.plot(white_board,linewidth=4,color="orange",label="white_board")
+    plt.plot(char_red,linewidth=4,color="red",label="char_red")
+    plt.plot(char_yellow,linewidth=4,color="yellow",label="char_yellow")
+    plt.plot(human_char,linewidth=4,color="blue",label="human_char")
     
     """
     #直線グラフ

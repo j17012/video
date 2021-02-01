@@ -4,18 +4,25 @@
     <div class="player">
         <div class="video">
             <!--動画再生部分-->
-            <video class="video_player" id="video" width="1100px" height="480px" controls></video><br/>
+            <video class="video_player" id="video" width="1100px" height="380px" controls></video><br/>
             <!--動画ファイルを選択する-->
             <p>ファイルを選択して下さい<br/></p>
-            <input type="file" id="filename" value="ファイル読み込み"/><br/>
+            <input type="file" id="filename" value="ファイル読み込み"/><br/> 
+            <!-- 再生位置の表示
+                再生位置  :<span id="position">-</span><br/>
+             -->
+             <!--ラベルバーを生成する-->
+             <img src="{% url 'app:plot' %}" width="1215px" height="480px">
         </div>
 
-        <div class="label">
-            <!-- <canvas id="ex_chart"></canvas> -->
-            <img src="{% url 'app:plot' %}" width="1215px" height="480px">
-        </div>
+        <div class="video_link">
+            <div class="link">
+                <a href="{% url  'app:index' %}">トップページ</a>
+            </div>
+            <div class="link">
+                <a href="{% url  'app:upload_label' %}">ラベル情報アップロード</a>
+            </div>
 
-        <div class="label_info">
             <h2>ラベル情報</h2>
             <table border="1">
                 <tr>
@@ -40,14 +47,6 @@
                 {% endfor %}
             </table>
         </div>
-        <div class="video_link">
-            <div class="link">
-                <a href="{% url  'app:index' %}">トップページ</a>
-            </div>
-            <div class="link">
-                <a href="{% url  'app:upload_label' %}">ラベル情報アップロード</a>
-            </div>
-        </div>
     </div>
 
         <script>
@@ -61,6 +60,11 @@
                     document.querySelector('video').src = URL.createObjectURL(file);
                     document.getElementById('filename').innerHTML = document.querySelector('video').src;
                 }, false );
+                //動画の現在の再生位置を表示する
+                var v = document.getElementById("video");
+                    v.addEventListener("timeupdate", function(){
+                    document.getElementById("position").innerHTML = v.currentTime;
+                }, false);
             }
     
             init()
