@@ -11,8 +11,9 @@
                 <p>ファイルを選択して下さい<br/></p>
                 <input type="file" id="filename" value="ファイル読み込み"/><br/> 
             </div>
-             <!-- シークバーの表示 -->
+             <!-- プログレスバーの表示 -->
              <div style="width: 950px;">
+                <!-- <progress class="input_range" min="1" max="100"  value="0" id="progress_time">-->
                 <input type="range" class="input-range" min="1" max="100"  value="0" id="progress-range">
             </div>
              <!-- ラベルバーを生成する -->
@@ -67,31 +68,22 @@
                     document.getElementById('video').innerHTML = document.querySelector('video').src;
                 }, false );
 
-                // 動画
-                const video = $('#video').get(0);
-                // プログレスバー
-                const progress_range = $('#progress-range');
-                const range_max      = progress_range.attr('max');
+                //　ビデオを取得する
+                var video = $('#video').get(0);
+                
+                //プログレスバー
+                var progress_time = $('#progress-range');
+                var time = progress_time.attr('max')
+                
+                //長さを更新
+                progress_time.addEventListener('timeupdate', function(e){
+                    var maxtTime = video.duration; // 動画全体の時間
+                    var nouTime = video.currentTime; // 現在の再生時間
+                    time_progress = nouTimu / maxTime;
+                    progress_time.val(time_progress * 100);
+                })
 
-                // 動画再生中 プログレスバー長さ更新
-                video.addEventListener('timeupdate', function(e) {
-                    const video_porgress = video.currentTime / video.duration;
-                    progress_range.val(video_porgress * 100);
-                });
-
-                // プログレスバー変更中（ドラッグ中）
-                progress_range.on( 'input', function () {
-                    const percent     = $(this).val() / range_max;
-                    video.currentTime = video.duration * percent;
-                } );
-                // プログレスバー変更後
-                progress_range.change( function () {
-                    const percent     = $(this).val() / range_max;
-                    video.currentTime = video.duration * percent;
-                } );
-
-
-            }
+               
     
             init()
             /*
