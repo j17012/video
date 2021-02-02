@@ -69,10 +69,10 @@
                 }, false );
 
                 //　ビデオを取得する
-                var video = $('#video').get(0);
-                
+                const video = $('#video').get(0);
+                /*
                 //プログレスバー
-                var progress_time = $('#progress-range');
+                var progress_time = $('#progress_time');
                 var time = progress_time.attr('max')
                 
                 //長さを更新
@@ -82,8 +82,33 @@
                     time_progress = nouTimu / maxTime;
                     progress_time.val(time_progress * 100);
                 })
+                // 現在位置取得
+                progress_time.on('input', function(){
+                    var percent = $(this).val() / time;
+                    nouTime = maxTime * percent;
+                })
+                */
+               // プログレスバー
+                const progress_range = $('#progress-range');
+                const range_max      = progress_range.attr('max');
 
-               
+                 // 動画再生中 プログレスバー長さ更新
+                video.addEventListener('timeupdate', function(e) {
+                    const video_porgress = video.currentTime / video.duration;
+                    progress_range.val(video_porgress * 100);
+                });
+
+                // プログレスバー変更中（ドラッグ中）
+                progress_range.on( 'input', function () {
+                    const percent     = $(this).val() / range_max;
+                    video.currentTime = video.duration * percent;
+                } );
+                // プログレスバー変更後
+                progress_range.change( function () {
+                    const percent     = $(this).val() / range_max;
+                    video.currentTime = video.duration * percent;
+                } );
+            };
     
             init()
             /*
