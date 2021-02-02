@@ -96,8 +96,29 @@ def label(request):
     else:
         return render(request,'app/upload_label.html')
 
-#グラフ作成
 def setPlt():
+    colors = ["blue",  "yellow", "red", "orange","green", "darkred"]
+    #Label_Infoのman,pc_char,white_board,char_red,char_yellow,human_charを変数で設定する記述をする
+    x = [1, 2, 3, 4, 5, 6]
+    #Label_Infoのsecをi:s(n分n秒)で設定する記述をする
+    y = [5, 6, 7, 8, 9, 10]
+
+    label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
+    
+    #グラフを生成する範囲
+    plt.figure(figsize = (12, 2))
+
+    ax = plt.gca()
+    ax.axes.xaxis.set_visible(False)
+    ax.yaxis.label.set_color(colors)
+
+    #横棒グラフ生成
+    plt.barh(x, y, color = colors)
+
+    plt.yticks(x, label_x)  # X軸のラベル
+
+#グラフ作成
+def setPlt2():
     #格納されているラベル情報を全件取得
     data = Label_Info.objects.all()
     #各ラベル情報を取得
@@ -109,22 +130,8 @@ def setPlt():
     char_yellow = [Label_Info.char_yellow for Label_Info in data]
     human_char = [Label_Info.human_char for Label_Info in data ]
 
-    """
-    #Label_Infoのman,pc_char,white_board,char_red,char_yellow,human_charを変数で設定する記述をする
-    x = [man,pc_char,white_board,char_red,char_yellow,human_char]
-    #Label_Infoのsecをi:s(n分n秒)で設定する記述をする
-    y = [sec]
-
-    label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
-    label_y = [sec]
-    
-    plt.barh(x,y)
-
-    plt.yticks(x,label_x)  # X軸のラベル
-    plt.xticks(y,label_y)   # y軸ラベル
-    """
     #グラフを生成する範囲
-    plt.figure(figsize=(12, 4))
+    plt.figure(figsize = (13.5, 2))
 
     #折れ線グラフ
     plt.plot(man,linewidth=4,color="darkred",label="man")
@@ -144,7 +151,7 @@ def setPlt():
     for i in range(len(X)):
         plt.plot(X[i:i+2], Y[i:i+2], color= 'red' if F[i] == 0 else 'blue')
     """
-    
+
 # SVG化
 def plt2svg():
     buf = io.BytesIO()
@@ -152,11 +159,25 @@ def plt2svg():
     s = buf.getvalue()
     buf.close()
     return s
-
-# 実行するビュー関数
+# 横棒グラフを描画
 def get_svg(request):
     setPlt()  
     svg = plt2svg()  #SVG化
+    plt.cla()  # グラフをリセット
+    response = HttpResponse(svg, content_type='image/svg+xml')
+    return response
+
+# SVG化
+def plt3svg():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='svg', bbox_inches='tight')
+    s = buf.getvalue()
+    buf.close()
+    return s
+# 折れ線グラフを描画
+def get_svg2(request):
+    setPlt2()  
+    svg = plt3svg()  #SVG化
     plt.cla()  # グラフをリセット
     response = HttpResponse(svg, content_type='image/svg+xml')
     return response
