@@ -3,17 +3,23 @@
 {% block content %}
     <div class="player">
         <div class="video">
-            <!--動画再生部分-->
-            <video class="video_player" id="video" width="1100px" height="380px" controls></video><br/>
-            <!--動画ファイルを選択する-->
-            <p>ファイルを選択して下さい<br/></p>
-            <input type="file" id="filename" value="ファイル読み込み"/><br/> 
-            <!-- 再生位置の表示
-                再生位置  :<span id="position">-</span><br/>
-             -->
-             <!--ラベルバーを生成する-->
-             <img src="{% url 'app:plot' %}" width="1215px" height="200px">
-             <img src="{% url 'app:plot2' %}" width="1215px" height="200px">
+            <!-- 動画プレイヤー -->
+            <div class="video_player">
+                <!-- 動画再生 -->
+                <video id="video" width="950px" height="380px" controls></video><br/>
+                <!-- 動画ファイルを選択する -->
+                <p>ファイルを選択して下さい<br/></p>
+                <input type="file" id="filename" value="ファイル読み込み"/><br/> 
+            </div>
+             <!-- シークバーの表示 -->
+             <div style="width: 950px;">
+                <input type="range" class="input-range" min="1" max="100" step="0.01" value="0" id="progress-range">
+            </div>
+             <!-- ラベルバーを生成する -->
+             <div class="label_bar">
+                <img src="{% url 'app:plot' %}" width="1215px" height="200px">
+                <img src="{% url 'app:plot2' %}" width="1215px" height="200px">
+             </div>
         </div>
 
         <div class="video_link">
@@ -51,21 +57,40 @@
     </div>
 
         <script>
-
-            //選択された動画ファイルを再生する
+            //動画プレイヤー
             function init(){
-                var f = document.getElementById("filename");
-                f.addEventListener( "change", function (event) {
+                var f = document.getElementById('filename');
+                f.addEventListener( 'change', function (event) {
                     var URL = URL || webkitURL;
                     var file = event.target.files[0];
                     document.querySelector('video').src = URL.createObjectURL(file);
-                    document.getElementById('filename').innerHTML = document.querySelector('video').src;
+                    document.getElementById('video').innerHTML = document.querySelector('video').src;
                 }, false );
-                //動画の現在の再生位置を表示する
-                var v = document.getElementById("video");
-                    v.addEventListener("timeupdate", function(){
-                    document.getElementById("position").innerHTML = v.currentTime;
-                }, false);
+
+                // 動画
+                const video = $('#video').get(0);
+                // プログレスバー
+                const progress_range = $('#progress-range');
+                const range_max      = progress_range.attr('max');
+
+                // 動画再生中 プログレスバー長さ更新
+                video.addEventListener('timeupdate', function(e) {
+                    const video_porgress = video.currentTime / video.duration;
+                    progress_range.val(video_porgress * 100);
+                });
+
+                // プログレスバー変更中（ドラッグ中）
+                progress_range.on( 'input', function () {
+                    const percent     = $(this).val() / range_max;
+                    video.currentTime = video.duration * percent;
+                } );
+                // プログレスバー変更後
+                progress_range.change( function () {
+                    const percent     = $(this).val() / range_max;
+                    video.currentTime = video.duration * percent;
+                } );
+
+
             }
     
             init()

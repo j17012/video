@@ -106,7 +106,7 @@ def setPlt():
     label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
     
     #グラフを生成する範囲
-    plt.figure(figsize = (12, 2))
+    plt.figure(figsize = (11.5, 2))
 
     ax = plt.gca()
     ax.axes.xaxis.set_visible(False)
@@ -131,7 +131,7 @@ def setPlt2():
     human_char = [Label_Info.human_char for Label_Info in data ]
 
     #グラフを生成する範囲
-    plt.figure(figsize = (13.5, 2))
+    plt.figure(figsize = (12.5, 2))
 
     #折れ線グラフ
     plt.plot(man,linewidth=4,color="darkred",label="man")
