@@ -49,33 +49,33 @@ def mulit_upload(request):
     }
 
     return render(request, 'app/upload.html', context)
-#動画アップロード
+# 動画アップロード
 class UploadView(generic.CreateView):
-    #ファイルモデルのアップロードビュー
+    # ファイルモデルのアップロードビュー
     model = UploadFile
     form_class = UploadForm
     template_name = 'app/upload.html'
     success_url = reverse_lazy('app:file_list')
 
-#アップロード済み動画ファイル一覧
+# アップロード済み動画ファイル一覧
 class FileListView(generic.ListView):
     #アップロードされたファイルの一覧ページ
     model = UploadFile
 
-#アップロード済み画像ファイル一覧
+# アップロード済み画像ファイル一覧
 class ImageListView(generic.ListView):
-    #アップロードされたファイルの一覧ページ
+    # アップロードされたファイルの一覧ページ
     model = UploadImage
 
 
-#ラベル情報一覧(テーブル情報のみ表示)
+# ラベル情報一覧(テーブル情報のみ表示)
 def label_list(request):
     data = Label_Info.objects.all()
     params = {'data':data}
     return render(request,'app/label_list.html',params)
 
 
-#ラベルアップロード画面
+# ラベルアップロード画面
 def label(request):
     if 'csv' in request.FILES:
         form_data = TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')
@@ -97,31 +97,44 @@ def label(request):
         return render(request,'app/upload_label.html')
 
 def setPlt():
+    """
+    # 格納されているラベル情報を全件取得
+    data = Label_Info.objects.all()
+    # 各ラベル情報を取得
+    sec = [ Label_Info.sec for Label_Info in data]
+    man = [ Label_Info.man for Label_Info in data ]
+    pc_char = [Label_Info.pc_char for Label_Info in data ]
+    white_board = [ Label_Info.white_board for Label_Info in data ]
+    char_red = [Label_Info.char_red for Label_Info in data ]
+    char_yellow = [Label_Info.char_yellow for Label_Info in data]
+    human_char = [Label_Info.human_char for Label_Info in data ]
+    """
+    # グラフの色を設定する
     colors = ["blue",  "yellow", "red", "orange","green", "darkred"]
-    #Label_Infoのman,pc_char,white_board,char_red,char_yellow,human_charを変数で設定する記述をする
+    # Label_Infoのman,pc_char,white_board,char_red,char_yellow,human_charを変数で設定する記述をする
     x = [1, 2, 3, 4, 5, 6]
-    #Label_Infoのsecをi:s(n分n秒)で設定する記述をする
+    # Label_Infoのsecをi:s(n分n秒)で設定する記述をする
     y = [5, 6, 7, 8, 9, 10]
 
     label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
     
-    #グラフを生成する範囲
+    # グラフを生成する範囲
     plt.figure(figsize = (11.5, 2))
 
     ax = plt.gca()
     ax.axes.xaxis.set_visible(False)
     ax.yaxis.label.set_color(colors)
 
-    #横棒グラフ生成
+    # 横棒グラフ生成
     plt.barh(x, y, color = colors)
 
     plt.yticks(x, label_x)  # X軸のラベル
 
 #グラフ作成
 def setPlt2():
-    #格納されているラベル情報を全件取得
+    # 格納されているラベル情報を全件取得
     data = Label_Info.objects.all()
-    #各ラベル情報を取得
+    # 各ラベル情報を取得
     sec = [ Label_Info.sec for Label_Info in data]
     man = [ Label_Info.man for Label_Info in data ]
     pc_char = [Label_Info.pc_char for Label_Info in data ]
@@ -130,10 +143,10 @@ def setPlt2():
     char_yellow = [Label_Info.char_yellow for Label_Info in data]
     human_char = [Label_Info.human_char for Label_Info in data ]
 
-    #グラフを生成する範囲
+    # グラフを生成する範囲
     plt.figure(figsize = (12.5, 2))
 
-    #折れ線グラフ
+    # 折れ線グラフ
     plt.plot(man,linewidth=4,color="darkred",label="man")
     plt.plot(pc_char,linewidth=4,color="green",label="pc_char")
     plt.plot(white_board,linewidth=4,color="orange",label="white_board")
@@ -142,7 +155,7 @@ def setPlt2():
     plt.plot(human_char,linewidth=4,color="blue",label="human_char")
 
     """
-    #直線グラフ
+    # 直線グラフ
     X = np.arange(0,11,1)
     Y = np.arange(0,11,1)
     F = np.array([0,0,0,0,0,0,1,1,0,1,0])
