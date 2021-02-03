@@ -13,9 +13,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import pandas as pd
 from datetime import datetime as dt 
 import os.path
-
 
 def index(request):
     return render(request, 'app/index.html')
@@ -140,7 +140,7 @@ def setPlt2():
     plt.plot(char_red,linewidth=4,color="red",label="char_red")
     plt.plot(char_yellow,linewidth=4,color="yellow",label="char_yellow")
     plt.plot(human_char,linewidth=4,color="blue",label="human_char")
-    
+
     """
     #直線グラフ
     X = np.arange(0,11,1)
@@ -155,7 +155,7 @@ def setPlt2():
 # SVG化
 def plt2svg():
     buf = io.BytesIO()
-    plt.savefig(buf, format='svg', bbox_inches='tight')
+    plt.savefig(buf, format='svg', bbox_inches='tight', transparent=True)
     s = buf.getvalue()
     buf.close()
     return s
@@ -170,7 +170,7 @@ def get_svg(request):
 # SVG化
 def plt3svg():
     buf = io.BytesIO()
-    plt.savefig(buf, format='svg', bbox_inches='tight')
+    plt.savefig(buf, format='svg', bbox_inches='tight', transparent=True)
     s = buf.getvalue()
     buf.close()
     return s

@@ -77,16 +77,17 @@
                 
                 //長さを更新
                 progress_time.addEventListener('timeupdate', function(e){
-                    var maxtTime = video.duration; // 動画全体の時間
-                    var nouTime = video.currentTime; // 現在の再生時間
-                    time_progress = nouTimu / maxTime;
+                    var maxTime = video.duration; // 動画全体の時間
+                    var nowTime = video.currentTime; // 現在の再生時間
+                    var time_progress = nowTimu / maxTime;
                     progress_time.val(time_progress * 100);
                 })
                 // 現在位置取得
                 progress_time.on('input', function(){
                     var percent = $(this).val() / time;
-                    nouTime = maxTime * percent;
+                    nowTime = maxTime * percent;
                 })
+                
                 */
                // プログレスバー
                 const progress_range = $('#progress-range');
