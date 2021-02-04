@@ -111,10 +111,9 @@ def setPlt():
     """
     # グラフの色を設定する
     colors = ["blue",  "yellow", "red", "orange","green", "darkred"]
-    # Label_Infoのman,pc_char,white_board,char_red,char_yellow,human_charを変数で設定する記述をする
+    
     x = [1, 2, 3, 4, 5, 6]
-    # Label_Infoのsecをi:s(n分n秒)で設定する記述をする
-    y = [5, 6, 7, 8, 9, 10]
+    y = [6, 6, 6, 6, 6, 6]
 
     label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
     
