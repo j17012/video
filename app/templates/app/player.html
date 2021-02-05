@@ -21,6 +21,8 @@
                 <img src="{% url 'app:plot' %}" width="1215px" height="200px">
                 <img src="{% url 'app:plot2' %}" width="1215px" height="200px">
              </div>
+             <!--  グラフの描画エリア -->
+            <div id="chart_div" style="width: 1100px; height: 350px"></div>
         </div>
 
         <div class="video_link">
@@ -113,6 +115,37 @@
             };
     
             init()
+
+            // ライブラリのロード
+            // name:visualization(可視化),version:バージョン(1),packages:パッケージ(timeline)
+            google.load('visualization', '1', {'packages':['timeline']});     
+         
+            // グラフを描画する為のコールバック関数を指定
+            google.setOnLoadCallback(drawChart);
+        
+            // グラフの描画   
+            function drawChart() {         
+        
+            // メソッドからデータの生成
+            var data = new google.visualization.DataTable();
+            data.addColumn({ type: 'string', id: 'Position' });
+            data.addColumn({ type: 'timeofday', id: 'Start' });
+            data.addColumn({ type: 'timeofday', id: 'End' });
+            data.addRows([
+                [ 'man', new Date[0,0,0],   new Date[0,0,10]],
+                [ 'pc_char', new Date[0,0,0],   new Date[0,0,10]],      
+                [ 'white_board', new Date[0,0,0],   new Date[0,0,10]],
+                [ 'char_red', new Date[0,0,0],   new Date[0,0,10]],
+                [ 'char_yellow', new Date[0,0,0],   new Date[0,0,10]],      
+                [ 'human_char', new Date[0,0,0],   new Date[0,0,10]]
+            ]);
+                       
+            // 指定されたIDの要素にタイムラインを作成
+            var chart = new google.visualization.Timeline(document.getElementById('chart_div'));    
+                 
+            // グラフの描画
+            chart.draw(data, null);
+            }
             /*
             // ラベルバーの生成
             var ar = [

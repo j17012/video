@@ -71,7 +71,11 @@ body{
     background: #53aeff;
     cursor: pointer;
     -webkit-appearance: none;
-   }
+}
+#char_div{
+    position: relative;
+    left: 200px;
+}
 .video_link{
     grid-column: 1 / 2;
     grid-row: 1 / 2;

@@ -7,13 +7,16 @@ from .models import UploadFile, UploadImage, Label_Info
 from . import cuts
 from io import TextIOWrapper, StringIO
 import csv
+import json
+import requests
 import io
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 import pandas as pd
+import seaborn as sns
+import matplotlib.dates as mdates
 from datetime import datetime as dt 
 import os.path
 
@@ -108,6 +111,15 @@ def setPlt():
     char_red = [Label_Info.char_red for Label_Info in data ]
     char_yellow = [Label_Info.char_yellow for Label_Info in data]
     human_char = [Label_Info.human_char for Label_Info in data ]
+
+    dataset = pd.DataFrame([[man],[pc_char],[white_board],[char_red],[char_yellow],[human_char]],
+                            columns=['man','pc_char','white_board','char_red','char_yellow','human_char'],
+                            index=[sec]
+                            )
+    
+    fig, ax = plt.subplots(figsize=(10, 8))
+    ax.bar(dataset.columns, dataset.sum())
+    
     """
     # グラフの色を設定する
     colors = ["blue",  "yellow", "red", "orange","green", "darkred"]
@@ -116,7 +128,7 @@ def setPlt():
     y = [6, 6, 6, 6, 6, 6]
 
     label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
-    
+
     # グラフを生成する範囲
     plt.figure(figsize = (11.5, 2))
 

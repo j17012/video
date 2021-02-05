@@ -28,4 +28,3 @@ class Label_Info(models.Model):
     char_red = models.IntegerField('赤文字', blank=True, null=True)
     char_yellow = models.IntegerField('黄文字', blank=True, null=True)
     human_char = models.IntegerField('人', blank=True, null=True)
-
