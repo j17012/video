@@ -92,8 +92,8 @@ def label(request):
             label.pc_char = line[2]
             label.white_board = line[3]
             label.char_red = line[4]
-            label.char_yellow = line[5]
-            label.human_char = line[6]
+            #label.char_yellow = line[5]
+            #label.human_char = line[6]
             label.save()
 
         return render(request,'app/upload_label.html')
@@ -102,6 +102,7 @@ def label(request):
         return render(request,'app/upload_label.html')
 
 def setPlt():
+    """
     # 格納されているラベル情報を全件取得
     data = Label_Info.objects.all()
     # 各ラベル情報を取得
@@ -131,12 +132,12 @@ def setPlt():
 
     """
     # グラフの色を設定する
-    colors = ["blue",  "yellow", "red", "orange","green", "darkred"]
+    colors = ["green", "darkviolet","yellow", "fuchsia"]
     
-    x = [1, 2, 3, 4, 5, 6]
-    y = [6, 6, 6, 6, 6, 6]
+    x = [1, 2, 3, 4 ]
+    y = [6, 6, 6, 6]
 
-    label_x = ["human_char","char_yellow", "char_red", "white_board", "pc_char", "man"]
+    label_x = ["char_red", "white_board", "pc_char", "man"]
 
     # グラフを生成する範囲
     plt.figure(figsize = (11.5, 2))
@@ -149,7 +150,21 @@ def setPlt():
     plt.barh(x, y, color = colors)
 
     plt.yticks(x, label_x)  # X軸のラベル
-    """
+    # SVG化
+def plt2svg():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='svg', bbox_inches='tight', transparent=True)
+    s = buf.getvalue()
+    buf.close()
+    return s
+# 横棒グラフを描画
+def get_svg(request):
+    setPlt()  
+    svg = plt2svg()  #SVG化
+    plt.cla()  # グラフをリセット
+    response = HttpResponse(svg, content_type='image/svg+xml')
+    return response
+
 #グラフ作成
 def setPlt2():
     # 格納されているラベル情報を全件取得
@@ -165,14 +180,15 @@ def setPlt2():
 
     # グラフを生成する範囲
     plt.figure(figsize = (12.5, 2))
+    #"green", "darkviolet","yellow", "fuchsia"
 
     # 折れ線グラフ(プロットするデータ,線の太さ,色,ラベル名)
-    plt.plot(man,linewidth=4,color="darkred",label="man")
-    plt.plot(pc_char,linewidth=4,color="green",label="pc_char")
-    plt.plot(white_board,linewidth=4,color="orange",label="white_board")
-    plt.plot(char_red,linewidth=4,color="red",label="char_red")
-    plt.plot(char_yellow,linewidth=4,color="yellow",label="char_yellow")
-    plt.plot(human_char,linewidth=4,color="blue",label="human_char")
+    plt.plot(man,linewidth=4,color="fuchsia",label="man")
+    plt.plot(pc_char,linewidth=4,color="yellow",label="pc_char")
+    plt.plot(white_board,linewidth=4,color="darkviolet",label="white_board")
+    plt.plot(char_red,linewidth=4,color="green",label="char_red")
+    #plt.plot(char_yellow,linewidth=4,color="yellow",label="char_yellow")
+    #plt.plot(human_char,linewidth=4,color="blue",label="human_char")
 
     """
     # 直線グラフ
@@ -184,21 +200,6 @@ def setPlt2():
     for i in range(len(X)):
         plt.plot(X[i:i+2], Y[i:i+2], color= 'red' if F[i] == 0 else 'blue')
     """
-
-# SVG化
-def plt2svg():
-    buf = io.BytesIO()
-    plt.savefig(buf, format='svg', bbox_inches='tight', transparent=True)
-    s = buf.getvalue()
-    buf.close()
-    return s
-# 横棒グラフを描画
-def get_svg(request):
-    setPlt()  
-    svg = plt2svg()  #SVG化
-    plt.cla()  # グラフをリセット
-    response = HttpResponse(svg, content_type='image/svg+xml')
-    return response
 
 # SVG化
 def plt3svg():
