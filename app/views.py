@@ -6,6 +6,7 @@ from .forms import  UploadForm, UploadFormSet, UploadMultiForm
 from .models import UploadFile, UploadImage, Label_Info
 from . import cuts
 from io import TextIOWrapper, StringIO
+from django_pandas.io import read_frame
 import csv
 import json
 import requests
@@ -101,32 +102,28 @@ def label(request):
     else:
         return render(request,'app/upload_label.html')
 
+#
 def setPlt():
-    
     # 格納されているラベル情報を全件取得
     data = Label_Info.objects.all()
-    # 各ラベル情報を取得
-    sec = [ Label_Info.sec for Label_Info in data]
-    man = [ Label_Info.man for Label_Info in data ]
-    pc_char = [Label_Info.pc_char for Label_Info in data ]
-    white_board = [ Label_Info.white_board for Label_Info in data ]
-    char_red = [Label_Info.char_red for Label_Info in data ]
-    char_yellow = [Label_Info.char_yellow for Label_Info in data]
-    human_char = [Label_Info.human_char for Label_Info in data ]
-    
 
-    # 'man', 'pc_char', 'white_board','char_red','char_yellow','human_char'
+    # DataFrameの形式に変換する 第1引数にQuerySetデータ、fieldnamesに取得したいカラムをリスト形式で指定
+    df = read_frame(data, fieldnames=['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'])
+
+    # 積み上げ棒グラフを描画
+    ax = df.plot.barh(stacked=True, figsize=(10.5,2),  color={'man': 'fuchsia', 'pc_char': 'yellow', 'white_board': 'darkviolet', 'char_red': 'green', 'char_yellow': 'orange', 'human_char': 'red'})
+    ax.xaxis.set_visible(False)
+    ax.invert_yaxis()
+    """
+    # 積み上げ棒グラフ
+     # 'man', 'pc_char', 'white_board','char_red','char_yellow','human_char'
     # [[man], [pc_char], [white_board], [char_red], [char_yellow], [human_char]
     #[Label_Info.sec for Label_Info in data],[Label_Info.pc_char for Label_Info in data],[white_board],[char_red],[char_yellow],[human_char]
     # [100, 200, 50, 30, 40, 60], [30, 40, 60, 10, 20, 50], [50, 30, 60, 30, 40, 60], [100, 20, 30, 40, 60, 70], [30, 40, 60, 30, 40, 60], [50, 30, 60, 30, 40, 60]
-    
+
     df = pd.DataFrame([[100, 200, 50, 30, 40, 60], [30, 40, 60, 10, 20, 50], [50, 30, 60, 30, 40, 60], [100, 20, 30, 40, 60, 70], [30, 40, 60, 30, 40, 60], [50, 30, 60, 30, 40, 60]],
-                            columns = ['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'],
                             index = ['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'])
 
-    ax = df.plot.barh(stacked=True, figsize=(11.5,2), legend=False)
-    ax.xaxis.set_visible(False)
-    """
     plot_df = pd.DataFrame(index = df.index)
     for col in df.columns:
         plot_df[col] = round(100 * df[col] / df[col] / df[col].sum(),1)
@@ -192,12 +189,12 @@ def setPlt2():
     #green", "darkviolet","yellow", "fuchsia"
 
     # 折れ線グラフ(プロットするデータ,線の太さ,色,ラベル名)
-    plt.plot(man,linewidth=4,color="fuchsia",label="man")
-    plt.plot(pc_char,linewidth=4,color="yellow",label="pc_char")
-    plt.plot(white_board,linewidth=4,color="darkviolet",label="white_board")
-    plt.plot(char_red,linewidth=4,color="green",label="char_red")
-    plt.plot(char_yellow,linewidth=4,color="orange",label="char_yellow")
-    plt.plot(human_char,linewidth=4,color="blue",label="human_char")
+    plt.plot(man,lw=4,color="fuchsia",label="man")
+    plt.plot(pc_char,lw=4,color="yellow",label="pc_char")
+    plt.plot(white_board,lw=4,color="darkviolet",label="white_board")
+    plt.plot(char_red,lw=4,color="green",label="char_red")
+    plt.plot(char_yellow,lw=4,color="orange",label="char_yellow")
+    plt.plot(human_char,lw=4,color="blue",label="human_char")
     
 
     """
