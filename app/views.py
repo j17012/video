@@ -92,8 +92,8 @@ def label(request):
             label.pc_char = line[2]
             label.white_board = line[3]
             label.char_red = line[4]
-            #label.char_yellow = line[5]
-            #label.human_char = line[6]
+            label.char_yellow = line[5]
+            label.human_char = line[6]
             label.save()
 
         return render(request,'app/upload_label.html')
@@ -102,7 +102,7 @@ def label(request):
         return render(request,'app/upload_label.html')
 
 def setPlt():
-    """
+    
     # 格納されているラベル情報を全件取得
     data = Label_Info.objects.all()
     # 各ラベル情報を取得
@@ -117,27 +117,34 @@ def setPlt():
 
     # 'man', 'pc_char', 'white_board','char_red','char_yellow','human_char'
     # [[man], [pc_char], [white_board], [char_red], [char_yellow], [human_char]
+    #[Label_Info.sec for Label_Info in data],[Label_Info.pc_char for Label_Info in data],[white_board],[char_red],[char_yellow],[human_char]
     # [100, 200, 50, 30, 40, 60], [30, 40, 60, 10, 20, 50], [50, 30, 60, 30, 40, 60], [100, 20, 30, 40, 60, 70], [30, 40, 60, 30, 40, 60], [50, 30, 60, 30, 40, 60]
-    dataset = pd.DataFrame([[Label_Info.sec for Label_Info in data],[Label_Info.pc_char for Label_Info in data],[white_board],[char_red],[char_yellow],[human_char]],
+    
+    df = pd.DataFrame([[100, 200, 50, 30, 40, 60], [30, 40, 60, 10, 20, 50], [50, 30, 60, 30, 40, 60], [100, 20, 30, 40, 60, 70], [30, 40, 60, 30, 40, 60], [50, 30, 60, 30, 40, 60]],
                             columns = ['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'],
-                            index = [[sec]])
-    plot_dataset = pd.DataFrame(index = dataset.index)
-    for col in dataset.columns:
-        plot_dataset[col] = round(100 * dataset[col] / dataset[col] / dataset[col].sum(),1)
+                            index = ['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'])
+
+    ax = df.plot.barh(stacked=True, figsize=(11.5,2), legend=False)
+    ax.xaxis.set_visible(False)
+    """
+    plot_df = pd.DataFrame(index = df.index)
+    for col in df.columns:
+        plot_df[col] = round(100 * df[col] / df[col] / df[col].sum(),1)
 
     fig, ax = plt.subplots(figsize=(11, 2))
-    for i in range(len(dataset)):
-        ax.bar(dataset.columns, dataset.iloc[i], bottom=dataset.iloc[:i].sum())
-    ax.legend(dataset.index)
+    for i in range(len(df)):
+        ax.bar(df.columns, df.iloc[i], bottom=df.iloc[:i].sum())
+    ax.legend(df.index)
+    """
 
     """
     # グラフの色を設定する
-    colors = ["green", "darkviolet","yellow", "fuchsia"]
+    colors = ["red", "orange", "green", "darkviolet","yellow", "fuchsia"]
     
-    x = [1, 2, 3, 4 ]
-    y = [6, 6, 6, 6]
+    x = [1, 2, 3, 4 ,5, 6]
+    y = [6, 6, 6, 6, 6, 6]
 
-    label_x = ["char_red", "white_board", "pc_char", "man"]
+    label_x = ["human_char", "char_yellow", "char_red", "white_board", "pc_char", "man"]
 
     # グラフを生成する範囲
     plt.figure(figsize = (11.5, 2))
@@ -150,6 +157,7 @@ def setPlt():
     plt.barh(x, y, color = colors)
 
     plt.yticks(x, label_x)  # X軸のラベル
+    """
     # SVG化
 def plt2svg():
     buf = io.BytesIO()
@@ -180,15 +188,17 @@ def setPlt2():
 
     # グラフを生成する範囲
     plt.figure(figsize = (12.5, 2))
-    #"green", "darkviolet","yellow", "fuchsia"
+
+    #green", "darkviolet","yellow", "fuchsia"
 
     # 折れ線グラフ(プロットするデータ,線の太さ,色,ラベル名)
     plt.plot(man,linewidth=4,color="fuchsia",label="man")
     plt.plot(pc_char,linewidth=4,color="yellow",label="pc_char")
     plt.plot(white_board,linewidth=4,color="darkviolet",label="white_board")
     plt.plot(char_red,linewidth=4,color="green",label="char_red")
-    #plt.plot(char_yellow,linewidth=4,color="yellow",label="char_yellow")
-    #plt.plot(human_char,linewidth=4,color="blue",label="human_char")
+    plt.plot(char_yellow,linewidth=4,color="orange",label="char_yellow")
+    plt.plot(human_char,linewidth=4,color="blue",label="human_char")
+    
 
     """
     # 直線グラフ
