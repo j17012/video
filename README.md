@@ -3,7 +3,7 @@
 2．結果動画画面(動画再生・ラベルバー生成)    
 
 ## 操作手順   
-1.git clone https://github.com/j17012/video.git  
+1.git clone https://github.com/j17012/video.git (任意の場所)    
 2.cd video  
 3.pip3 install -r requirements.txt  
 4.python3 manage.py migrate  
