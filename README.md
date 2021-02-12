@@ -6,8 +6,8 @@
 1.git clone https://github.com/j17012/video.git  
 2.cd video  
 3.pip3 install -r requirements.txt  
-4.python3 manage.py createsuperuser  
-5.python3 manage.py migrate  
+4.python3 manage.py migrate  
+5.python3 manage.py createsuperuser  
 6.python3 manage.py runserver  
 7.http://localhost:8000/top/  
    
