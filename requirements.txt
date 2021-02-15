@@ -4,7 +4,4 @@ numpy==1.19.5
 opencv-python==4.4.0.44
 Pillow==7.0.0
 seaborn==0.11.1
-<<<<<<< HEAD
 
-=======
->>>>>>> b3acd7ba928ddacba841acc31553f4a6a266d38b
