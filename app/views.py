@@ -102,14 +102,14 @@ def label(request):
     else:
         return render(request,'app/upload_label.html')
 
-#
+
 def setPlt():
     # 格納されているラベル情報を全件取得
     data = Label_Info.objects.all()
 
     # DataFrameの形式に変換する 第1引数にQuerySetデータ、fieldnamesに取得したいカラムをリスト形式で指定
     df = read_frame(data, fieldnames=['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'])
-    
+
     """
     df_man = [df.man]
     df_pc_char = [df.pc_char]
@@ -174,7 +174,7 @@ def setPlt():
 
     plt.yticks(x, label_x)  # X軸のラベル
     """
-    # SVG化
+# SVG化
 def plt2svg():
     buf = io.BytesIO()
     plt.savefig(buf, format='svg', bbox_inches='tight', transparent=True)
