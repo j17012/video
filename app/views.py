@@ -109,7 +109,26 @@ def setPlt():
 
     # DataFrameの形式に変換する 第1引数にQuerySetデータ、fieldnamesに取得したいカラムをリスト形式で指定
     df = read_frame(data, fieldnames=['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'])
+    
+    """
+    df_man = [df.man]
+    df_pc_char = [df.pc_char]
+    df_white_board = [df.white_board]
+    df_char_red = [df.char_red]
+    df_char_yellow = [df.char_yellow]
+    df_human_char = [df.human_char]
 
+    labels = ['man', 'pc_char', 'white_board','char_red','char_yellow','human_char']
+    barhWidth = 1
+
+    man = np.array(df_man)
+    pc_char = np.array(df_pc_char)
+    white_board = np.array(df_white_board)
+    char_red = np.array(df_char_red)
+    char_yellow = np.array(df_char_yellow)
+    human_char = np.array(df_human_char)
+    """
+    
     # 積み上げ棒グラフを描画
     ax = df.plot.barh(stacked=True, figsize=(10.5,2),  color={'man': 'fuchsia', 'pc_char': 'yellow', 'white_board': 'darkviolet', 'char_red': 'green', 'char_yellow': 'orange', 'human_char': 'red'})
     ax.xaxis.set_visible(False)
