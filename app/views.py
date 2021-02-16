@@ -111,6 +111,7 @@ def setPlt():
     df = read_frame(data, fieldnames=['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'])
 
     """
+    df_all = [df]
     df_man = [df.man]
     df_pc_char = [df.pc_char]
     df_white_board = [df.white_board]
