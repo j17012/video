@@ -111,23 +111,14 @@ def setPlt():
     df = read_frame(data, fieldnames=['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'])
 
     """
-    df_all = [df]
-    df_man = [df.man]
-    df_pc_char = [df.pc_char]
-    df_white_board = [df.white_board]
-    df_char_red = [df.char_red]
-    df_char_yellow = [df.char_yellow]
-    df_human_char = [df.human_char]
-
     labels = ['man', 'pc_char', 'white_board','char_red','char_yellow','human_char']
-    barhWidth = 1
 
-    man = np.array(df_man)
-    pc_char = np.array(df_pc_char)
-    white_board = np.array(df_white_board)
-    char_red = np.array(df_char_red)
-    char_yellow = np.array(df_char_yellow)
-    human_char = np.array(df_human_char)
+    man = np.array(df.man)
+    pc_char = np.array(df.pc_char)
+    white_board = np.array(df.white_board)
+    char_red = np.array(df_char.red)
+    char_yellow = np.array(df.char_yellow)
+    human_char = np.array(df.human_char)
     """
     
     # 積み上げ棒グラフを描画
