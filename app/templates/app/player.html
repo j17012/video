@@ -18,7 +18,8 @@
             </div>
              <!-- ラベルバーを生成する -->
              <div class="label_bar">
-                <img src="{% url 'app:plot' %}" width="1215px" height="200px">
+                <!-- <img src="{% url 'app:plot' %}" width="1215px" height="200px"> -->
+                <canvas id="labelbar"></canvas>
                 <img src="{% url 'app:plot2' %}" width="1215px" height="200px">
              </div>
              <!--  グラフの描画エリア -->
@@ -34,7 +35,7 @@
             </div>
             <!--結果動画画面でラベル情報を確認するために表示 -->
             <h2>ラベル情報</h2>
-            <table border="1">
+            <table id="label-data" border="1">
                 <tr>
                     <th>sec</th>
                     <th>man</th>
@@ -116,6 +117,8 @@
     
             init()
 
+            
+            /*
             // ライブラリのロード
             // name:visualization(可視化),version:バージョン(1),packages:パッケージ(timeline)
             google.load('visualization', '1', {'packages':['timeline']});     
