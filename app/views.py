@@ -7,6 +7,7 @@ from .models import UploadFile, UploadImage, Label_Info
 from . import cuts
 from io import TextIOWrapper, StringIO
 from django_pandas.io import read_frame
+from django.views.decorators.csrf import ensure_csrf_cookie
 import csv
 import json
 import requests
@@ -22,13 +23,14 @@ import os.path
 
 matplotlib.use('Agg')
 
+def view(request):
+    pass
 
 def index(request):
     return render(request, 'app/index.html')
 
 def player(request):
-    data = Label_Info.objects.all()
-    params = {'data':data}
+    params = {'data':Label_Info.objects.all()}
     return render(request,'app/player.html',params)
 
 def result(request):

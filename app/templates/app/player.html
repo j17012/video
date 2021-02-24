@@ -11,28 +11,30 @@
                 <p>ファイルを選択して下さい<br/></p>
                 <input type="file" id="filename" value="ファイル読み込み"/><br/> 
             </div>
+
              <!-- プログレスバーの表示 -->
              <div style="width: 950px;">
                 <!-- <progress class="input_range" min="1" max="100"  value="0" id="progress_time">-->
                 <input type="range" class="input-range" min="1" max="100"  value="0" id="progress-range">
             </div>
+
              <!-- ラベルバーを生成する -->
              <div class="label_bar">
                 <!-- <img src="{% url 'app:plot' %}" width="1215px" height="200px"> -->
-                <canvas id="labelbar"></canvas>
+                <canvas id="labelbar" width="1215px" height="200px"></canvas>
                 <img src="{% url 'app:plot2' %}" width="1215px" height="200px">
              </div>
-             <!--  グラフの描画エリア -->
-            <div id="chart_div" style="width: 1100px; height: 350px"></div>
         </div>
 
         <div class="video_link">
             <div class="link">
                 <a href="{% url  'app:index' %}">トップページ</a>
             </div>
+
             <div class="link">
                 <a href="{% url  'app:upload_label' %}">ラベル情報アップロード</a>
             </div>
+
             <!--結果動画画面でラベル情報を確認するために表示 -->
             <h2>ラベル情報</h2>
             <table id="label-data" border="1">
@@ -47,7 +49,7 @@
                 </tr>
                 {% for Label_Info in data %}
                 <tr>
-                    <td>{{ Label_Info.sec |time:"i:s" }}</td>
+                    <td>{{ Label_Info.sec |time:"H:i:s" }}</td>
                     <td>{{ Label_Info.man }}</td>
                     <td>{{ Label_Info.pc_char }}</td>
                     <td>{{ Label_Info.white_board }}</td>
@@ -113,8 +115,45 @@
                     const percent     = $(this).val() / range_max;
                     video.currentTime = video.duration * percent;
                 } );
+
+                // ラベルバー
+                // DBの値を配列化
+                var data = [];
+
+                // ラベル名の配列
+                var labels = data[0].slice(1);
+
+                // ラベルバーのカラーを定義
+                var barColor = {};
+                var barColorArr = ['fuchsia',  'yellow', 'darkviolet', 'green',  'orange',  'red'];
+                $(labels).each(function(i, label){
+                    barColor[label] = barColorArr[i];
+                });
+
+                // プラグインに渡す引数を定義
+                var config = {
+                    labels: labels,
+                    barColor: barColor,
+                    data: sss,
+                    options: {
+                        canvasPadding: 20,
+                        spacing: 10,
+                        fontSize: 16,
+                        labelWidth: 100,
+                    }
+                }
+
+                // 引数の確認
+                console.log(config);
+
+                // ラベルバーを描画
+                $("#labelbar").labelBar(config);
+                // ブラウザサイズ変更時に再描画
+                $(window).resize(function(){
+                    $("#labelbar").labelBar(config);
+                });
             };
-    
+
             init()
 
             
