@@ -30,8 +30,8 @@ def index(request):
     return render(request, 'app/index.html')
 
 def player(request):
-    params = {'data':Label_Info.objects.all()}
-    return render(request,'app/player.html',params)
+    datas = {'data':Label_Info.objects.all()}
+    return render(request,'app/player.html',datas)
 
 def result(request):
     return render(request, 'app/result.html')

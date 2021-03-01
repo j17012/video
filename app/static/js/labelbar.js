@@ -41,6 +41,7 @@ $(function() {
 			// *
 			// データテーブル
 			// *
+			/*
 			var table = "<table id=\"label-data\" border=\"1\" style=\"max-width:100%; border-collapse:collapse;\">";
 			table += "<tr><th></th>";
 			$(labels).each(function(i, item) {
@@ -58,7 +59,8 @@ $(function() {
 
 			$("#label-data").remove();
 			this.after(table);
-
+			*/
+			
 			// *
 			// ラベルバー
 			// *

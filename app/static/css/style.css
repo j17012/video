@@ -80,6 +80,10 @@ body{
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
+#labelbar{
+    width: 1215px;
+    height: 200px;
+}
 /* upload_label.html */
 .upload_label_title{
     text-align: center;
