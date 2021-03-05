@@ -118,21 +118,22 @@
                 } );
 
                 // ラベルバー
-                // DBの値を配列化
-                var data = [];
+                // views.pyからデータを受け取る
+                const data = JSON.parse('{{ data_json|safe }}');
+                console.log(data)
 
                 // ラベル名の配列
-                var labels = ['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'];
+                const labels = ['man', 'pc_char', 'white_board','char_red','char_yellow','human_char'];
 
                 // ラベルバーのカラーを定義
-                var barColor = {};
-                var barColorArr = ['fuchsia',  'yellow', 'darkviolet', 'green',  'orange',  'red'];
+                const barColor = {};
+                const barColorArr = ['fuchsia',  'yellow', 'darkviolet', 'green',  'orange',  'red'];
                 $(labels).each(function(i, label){
                     barColor[label] = barColorArr[i];
                 });
 
                 // プラグインに渡す引数を定義
-                var config = {
+                const config = {
                     labels: labels,
                     barColor: barColor,
                     data: data,

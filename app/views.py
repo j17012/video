@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.http import HttpResponse
+from django.http.response import JsonResponse
 from .forms import  UploadForm, UploadFormSet, UploadMultiForm
 from .models import UploadFile, UploadImage, Label_Info
 from . import cuts
@@ -30,8 +31,16 @@ def index(request):
     return render(request, 'app/index.html')
 
 def player(request):
-    datas = {'data':Label_Info.objects.all()}
-    return render(request,'app/player.html',datas)
+    # 格納されているラベル情報を全件取得
+    labels = Label_Info.objects.all()
+    # 取得したラベル情報を配列化
+    df = read_frame(labels, fieldnames=['sec', 'man', 'pc_char', 'white_board','char_red','char_yellow','human_char'])
+    df_labels = df.to_csv(index=False)
+    return render(request,'app/player.html', {'data_json': json.dumps(df_labels, default=date_handler)})
+    
+def date_handler(obj):
+    if hasattr(obj, 'isoformat'):
+        return obj.isoformat()
 
 def result(request):
     return render(request, 'app/result.html')
